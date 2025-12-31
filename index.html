@@ -2,183 +2,262 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sree Subha Sarees | Saree Services in Houston</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sree Subha Sarees | Saree Draping in Sugar Land & Houston</title>
+
+  <!-- Google Fonts (Elegant + Narrow fallback) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
-    body {
+    :root {
+      --maroon: #7a1f3d;
+      --soft-bg: #fff8f5;
+      --text-dark: #2b2b2b;
+      --accent: #2fa86c;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fff8f2;
-      color: #333;
+      padding: 0;
     }
+
+    body {
+      font-family: "Inter", "Aptos Narrow", system-ui, sans-serif;
+      background: var(--soft-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", serif;
+      color: var(--maroon);
+    }
+
+    /* HEADER */
     header {
-      background: linear-gradient(90deg, #b22222, #d4af37);
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-    }
-    header h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 52px;
-      font-weight: normal;
-      margin-bottom: 10px;
-    }
-    header p {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-    }
-    nav {
-      background-color: #7a1f1f;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: #fff;
       display: flex;
-      justify-content: center;
-      gap: 25px;
-      padding: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    nav a {
+
+    .menu-btn {
+      font-size: 26px;
+      color: var(--maroon);
+      cursor: pointer;
+    }
+
+    .call-btn {
+      background: var(--accent);
       color: white;
+      padding: 10px 18px;
+      border-radius: 30px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease;
     }
+
+    .call-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* SIDE MENU */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background: white;
+      padding: 80px 20px;
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.15);
+      z-index: 999;
+    }
+
+    .side-menu a {
+      display: block;
+      margin-bottom: 20px;
+      color: var(--maroon);
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .side-menu a:hover {
+      transform: translateX(6px);
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding-top: 90px;
+    }
+
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
+      padding: 60px 20px;
+      max-width: 1100px;
       margin: auto;
     }
-    h2 {
-      color: #7a1f1f;
-      margin-bottom: 20px;
+
+    .hero {
+      text-align: center;
     }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 720px;
+      margin: auto;
+    }
+
+    /* SERVICES */
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
     }
-    .card {
+
+    .service-card {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      text-align: center;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
     }
-    .card h3 {
-      color: #b22222;
+
+    .service-card:hover {
+      transform: translateY(-6px);
     }
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 10px;
+
+    /* CONTACT */
+    .contact-box {
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     }
+
+    .contact-box p {
+      margin-bottom: 10px;
+    }
+
+    /* MAP */
+    iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 14px;
+      border: none;
+      margin-top: 20px;
+    }
+
     footer {
-      background-color: #7a1f1f;
+      background: var(--maroon);
       color: white;
       text-align: center;
-      padding: 20px;
+      padding: 18px;
+      font-size: 14px;
     }
-    .whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 32px;
+      }
     }
   </style>
 </head>
+
 <body>
 
 <header>
-  <h1>Sree Subha Sarees</h1>
-  <p>Professional Saree Draping & Pre‑Pleating Services in Houston</p>
-  <p style="font-family:'Playfair Display',serif; font-size:16px;">By Subha</p>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <a class="call-btn" href="tel:+1XXXXXXXXXX">
+    📞 Call
+  </a>
 </header>
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#services">Services</a>
-  <a href="#why">Why Choose Us</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#contact">Contact</a>
+<nav class="side-menu" id="menu">
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
 </nav>
 
-<section id="home">
-  <h2>Elegant Saree Draping Made Easy</h2>
-  <p>
-    Looking flawless in a saree should be effortless. At Sree Subha Sarees, we offer
-    professional saree draping and pre‑pleating services so you can enjoy your special
-    moments without worry.
-  </p>
-</section>
-  <h2>Welcome</h2>
-  <p>
-    From stunning pleats to elegant draping and flawless ironing — we handle it all,
-    so you look effortlessly beautiful for every occasion.
-  </p>
-</section>
+<main>
+  <section id="home" class="hero">
+    <h1>Sree Subha Sarees</h1>
+    <p>
+      Professional saree draping and pre-pleated saree services for weddings,
+      festivals, and special occasions in Sugar Land and Houston, Texas.
+    </p>
+  </section>
 
-<section id="services">
-  <h2>Our Services</h2>
-  <div class="services">
-    <div class="card">
-      <h3>Saree Pre‑Pleating</h3>
-      <p>Neat, even pleats prepared in advance for comfort and confidence.</p>
-      <div class="price">Starting at $25</div>
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service-card">
+        <h3>Saree Draping</h3>
+        <p>
+          Elegant, traditional, and modern saree draping styles customized for
+          every occasion.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3>Pre-Pleated Sarees</h3>
+        <p>
+          Perfectly stitched pleats for comfort, beauty, and effortless wear.
+        </p>
+      </div>
     </div>
-    <div class="card">
-      <h3>Saree Draping</h3>
-      <p>Professional draping for weddings, poojas, parties, and special occasions.</p>
-      <div class="price">$40</div>
+  </section>
+
+  <section id="contact">
+    <h2>Service Area & Contact</h2>
+
+    <div class="contact-box">
+      <p><strong>📍 Service Area:</strong> Sugar Land, TX & Houston, TX</p>
+      <p><strong>📧 Email:</strong> subhadra.jayaharan@gmail.com</p>
+      <p><strong>📞 Phone:</strong> Call for appointments</p>
     </div>
-  </div>
-</section>
 
-<section id="why">
-  <h2>Why Saree Draping & Pre‑Pleating by Subha</h2>
-  <div class="services">
-    <div class="card"><p>✔ Years of experience with traditional and modern draping styles</p></div>
-    <div class="card"><p>✔ Perfect pleats that stay intact all day</p></div>
-    <div class="card"><p>✔ Stress‑free service for weddings and events</p></div>
-    <div class="card"><p>✔ Trusted by local Houston families</p></div>
-  </div>
-</section>
-
-<section id="gallery">
-  <h2>Pre-Pleated Saree Gallery</h2>
-  <p>Here are examples of our neat and elegant pre-pleated saree work.</p>
-  <div class="services">
-    <div class="card">
-      <img src="sareeexam.jpg" alt="Pre-pleated saree" style="width:100%; border-radius:10px;">
-      <p>Custom pre-pleated saree prepared with precision and care.</p>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <h2>About Us</h2>
-  <p>
-    Sree Subha Sarees is a local Houston‑based service focused on preserving
-    the beauty and tradition of saree wear. We specialize in neat pleating and
-    elegant draping, helping our customers feel confident and comfortable.
-  </p>
-</section>
-
-<section id="contact">
-  <h2>Contact Me</h2>
-  <p>
-    📍 Serving Houston & nearby areas<br />
-    📧 Email: <strong>subhadra.jayaharan@gmail.com</strong><br />
-    📞 Phone / WhatsApp: <strong>346‑829‑6459</strong>
-  </p>
-</section>
+    <iframe
+      src="https://www.google.com/maps?q=Sugar+Land+TX&output=embed">
+    </iframe>
+  </section>
+</main>
 
 <footer>
-  <p>© 2025 Sree Subha Sarees | Houston</p>
+  © 2025 Sree Subha Sarees · All Rights Reserved
 </footer>
 
-<a class="whatsapp" href="https://wa.me/13468296459" target="_blank">WhatsApp Us</a>
+<script>
+  function toggleMenu() {
+    document.getElementById("menu").classList.toggle("open");
+  }
+</script>
 
 </body>
 </html>
