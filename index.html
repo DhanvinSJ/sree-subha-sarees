@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Added Playfair Display for the main hero heading -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
@@ -14,7 +15,7 @@
     :root {
       --maroon: #7a1f3d;
       --gold: #d4af37;
-      --bg: #fff8f2;
+      --bg: #fff8f2;          /* same cream color as Wix */
       --text: #333333;
       --accent: #2fa86c;
       --card: #ffffff;
@@ -35,6 +36,14 @@
 
     h1, h2, h3 {
       color: var(--maroon);
+    }
+
+    /* special style ONLY for the hero heading */
+    .hero-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      color: #1f1f1f;          /* almost black, like Wix */
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
     /* HEADER BAR */
@@ -59,6 +68,7 @@
       color: var(--maroon);
     }
 
+    /* hide the desktop menu – only hamburger everywhere */
     .desktop-nav {
       display: none;
       gap: 24px;
@@ -95,17 +105,17 @@
       margin-left: 10px;
     }
 
-    /* SIDE MENU (MOBILE) */
+    /* SIDE MENU (slides from RIGHT to LEFT) */
     .side-menu {
       position: fixed;
       top: 0;
-      left: -260px;
+      right: -260px;           /* start off-screen on the right */
       width: 260px;
       height: 100vh;
       background: #ffffff;
       padding: 80px 24px;
-      box-shadow: 2px 0 16px rgba(0,0,0,0.2);
-      transition: left 0.3s ease;
+      box-shadow: -2px 0 16px rgba(0,0,0,0.2);
+      transition: right 0.3s ease;   /* subtle slide animation */
       z-index: 999;
     }
 
@@ -119,18 +129,17 @@
     }
 
     .side-menu.open {
-      left: 0;
-    }
-
-    /* MAIN CONTENT */
-    main {
-      padding-top: 80px;
+      right: 0;                /* slides in from the right */
     }
 
     section {
       max-width: 1100px;
       margin: auto;
       padding: 60px 20px;
+    }
+
+    main {
+      padding-top: 80px;
     }
 
     /* HERO */
@@ -213,14 +222,12 @@
       padding: 20px;
     }
 
-    /* SECTION TITLES */
     h2.section-title {
       text-align: center;
       margin-bottom: 28px;
       font-size: 26px;
     }
 
-    /* GRID / CARDS */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
@@ -251,7 +258,6 @@
       color: var(--maroon);
     }
 
-    /* GALLERY */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
@@ -273,7 +279,6 @@
       display: block;
     }
 
-    /* CONTACT + MAP */
     .contact-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
@@ -316,7 +321,6 @@
       margin-top: 20px;
     }
 
-    /* WHATSAPP FLOATING BUTTON */
     .whatsapp-float {
       position: fixed;
       bottom: 18px;
@@ -339,13 +343,13 @@
       font-size: 18px;
     }
 
-    /* RESPONSIVE */
+    /* keep other responsive stuff the same */
     @media (min-width: 900px) {
       .desktop-nav {
-        display: flex;
+        display: none;   /* still hidden on desktop */
       }
       .menu-btn {
-        display: none;
+        display: block;  /* hamburger visible on desktop too */
       }
     }
 
@@ -391,13 +395,14 @@
         <i class="fa-solid fa-phone"></i> Call
       </a>
 
+      <!-- hamburger always visible -->
       <div class="menu-btn" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
       </div>
     </div>
   </div>
 
-  <!-- SIDE MENU (MOBILE) -->
+  <!-- SIDE MENU (MOBILE / DESKTOP) -->
   <nav class="side-menu" id="sideMenu">
     <a href="#home" onclick="toggleMenu()">Home</a>
     <a href="#services" onclick="toggleMenu()">Services</a>
@@ -410,9 +415,10 @@
     <!-- HERO -->
     <section id="home" class="hero">
       <div class="hero-text">
-        <h1>Saree Draping & Pre-Pleating in Sugar Land & Houston</h1>
+        <!-- added class="hero-title" but kept text the same -->
+        <h1 class="hero-title">Saree Draping &amp; Pre-Pleating in Sugar Land &amp; Houston</h1>
         <div class="hero-badges">
-          <div class="hero-badge">Bridal & Event Sarees</div>
+          <div class="hero-badge">Bridal &amp; Event Sarees</div>
           <div class="hero-badge">Perfect, Neat Pleats</div>
           <div class="hero-badge">Stress-Free Styling</div>
         </div>
@@ -437,7 +443,8 @@
       </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
+    <!-- rest of the sections stay exactly the same as before -->
+
     <section id="why">
       <h2 class="section-title">Why Saree Draping & Pre-Pleating by Subha?</h2>
       <div class="grid">
@@ -464,7 +471,6 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services">
       <h2 class="section-title">Our Services</h2>
       <div class="grid">
@@ -483,24 +489,19 @@
       </div>
     </section>
 
-    <!-- GALLERY -->
     <section id="gallery">
       <h2 class="section-title">Pre-Pleated Saree Gallery</h2>
       <p style="text-align:center;max-width:700px;margin:0 auto 18px;">
         A glimpse of our neat pre-pleating and elegant draping work. Replace these boxes with your saree photos.
       </p>
       <div class="gallery-grid">
-        <!-- Replace these with your real images -->
-        <div class="gallery-item">
-          <!-- Example: <img src="saree1.jpg" alt="Pre-pleated saree"> -->
-        </div>
+        <div class="gallery-item"></div>
         <div class="gallery-item"></div>
         <div class="gallery-item"></div>
         <div class="gallery-item"></div>
       </div>
     </section>
 
-    <!-- CONTACT + MAP -->
     <section id="contact">
       <h2 class="section-title">Service Area & Contact</h2>
       <div class="contact-layout">
@@ -537,7 +538,6 @@
     © 2025 Sree Subha Sarees · Saree Draping & Pre-Pleating · Sugar Land & Houston, TX
   </footer>
 
-  <!-- WHATSAPP FLOATING BUTTON -->
   <a
     class="whatsapp-float"
     href="https://wa.me/13468296459"
