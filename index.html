@@ -2,142 +2,557 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Sree Subha Sarees | Saree Draping & Pre-Pleating</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sree Subha Sarees | Saree Draping & Pre-Pleating Houston</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
   <style>
-    body {margin:0;font-family:'Poppins',sans-serif;background:#fff8f2;color:#333;}
-    header {background:linear-gradient(120deg,#8b1e3f,#d4af37);color:#fff;padding:60px 20px;text-align:center;}
-    header h1 {font-family:'Great Vibes',cursive;font-size:58px;margin:0;}
-    header p {font-size:18px;margin-top:10px;}
-    .cta-btn {display:inline-block;margin-top:20px;padding:14px 30px;background:#fff;color:#8b1e3f;border-radius:30px;font-weight:600;text-decoration:none;transition:0.3s;}
-    .cta-btn:hover {background:#f3e1c9;}
-    nav {display:none;}
-    .menu-btn{position:fixed;top:20px;right:20px;font-size:26px;color:#fff;background:#8b1e3f;padding:10px 14px;border-radius:50%;z-index:1001;cursor:pointer;}
-    .side-menu{position:fixed;top:0;right:-260px;width:260px;height:100%;background:#5a1026;color:#fff;display:flex;flex-direction:column;padding-top:80px;transition:0.4s;z-index:1000;}
-    .side-menu a{color:#fff;text-decoration:none;padding:15px 30px;font-size:18px;transition:0.3s;}
-    .side-menu a:hover{background:#8b1e3f;padding-left:40px;}
-    nav a {color:#fff;text-decoration:none;font-weight:500;}
-    section {padding:60px 20px;max-width:1100px;margin:auto;}
-    h2 {text-align:center;color:#8b1e3f;margin-bottom:30px;}
-    .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-    .card {background:#fff;padding:25px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,0.08);transition:transform 0.3s;}
-    .card:hover {transform:translateY(-6px);}    
-    .icon {font-size:32px;color:#8b1e3f;margin-bottom:12px;}
-    .testimonials {background:#fff0e6;}
-    .map iframe {width:100%;border:0;border-radius:20px;height:300px;}
-    footer {background:#5a1026;color:#fff;text-align:center;padding:25px;}
-    .whatsapp {position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 22px;border-radius:40px;text-decoration:none;font-weight:600;}
+    :root {
+      --maroon: #7a1f3d;
+      --gold: #d4af37;
+      --bg: #fff8f2;
+      --text: #333333;
+      --accent: #2fa86c;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3 {
+      color: var(--maroon);
+    }
+
+    /* HEADER BAR */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      z-index: 1000;
+    }
+
+    .brand {
+      font-family: "Great Vibes", cursive;
+      font-size: 28px;
+      color: var(--maroon);
+    }
+
+    .desktop-nav {
+      display: none;
+      gap: 24px;
+    }
+
+    .desktop-nav a {
+      text-decoration: none;
+      color: var(--maroon);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .call-btn {
+      background: var(--accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .call-btn i {
+      font-size: 14px;
+    }
+
+    .menu-btn {
+      font-size: 22px;
+      color: var(--maroon);
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    /* SIDE MENU (MOBILE) */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100vh;
+      background: #ffffff;
+      padding: 80px 24px;
+      box-shadow: 2px 0 16px rgba(0,0,0,0.2);
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .side-menu a {
+      display: block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: var(--maroon);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding-top: 80px;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 40px;
+      margin-bottom: 14px;
+    }
+
+    .hero-text p {
+      font-size: 17px;
+      margin-bottom: 24px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hero-badge {
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .primary-btn {
+      background: var(--maroon);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secondary-link {
+      font-size: 14px;
+      color: var(--maroon);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .hero-image {
+      background: linear-gradient(135deg, #fdf0ea, #fbe3f0);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    }
+
+    .hero-image-inner {
+      background: #fff;
+      border-radius: 16px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* SECTION TITLES */
+    h2.section-title {
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 26px;
+    }
+
+    /* GRID / CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      font-size: 28px;
+      color: var(--maroon);
+      margin-bottom: 10px;
+    }
+
+    .price-tag {
+      margin-top: 10px;
+      font-weight: 600;
+      color: var(--maroon);
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .gallery-item {
+      background: #f2e6df;
+      border-radius: 14px;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* CONTACT + MAP */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      background: var(--card);
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .contact-row i {
+      color: var(--maroon);
+    }
+
+    iframe {
+      width: 100%;
+      height: 260px;
+      border-radius: 16px;
+      border: none;
+    }
+
+    footer {
+      background: var(--maroon);
+      color: #fff;
+      text-align: center;
+      padding: 16px;
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    /* WHATSAPP FLOATING BUTTON */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      background: #25D366;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      z-index: 1000;
+    }
+
+    .whatsapp-float i {
+      font-size: 18px;
+    }
+
+    /* RESPONSIVE */
+    @media (min-width: 900px) {
+      .desktop-nav {
+        display: flex;
+      }
+      .menu-btn {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-image {
+        order: -1;
+      }
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 32px;
+      }
+      section {
+        padding: 44px 16px;
+      }
+    }
   </style>
 </head>
+
 <body>
-<div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-<div class="side-menu" id="sideMenu">
-  <a href="#home" onclick="toggleMenu()">Home</a>
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
-</div>
 
-<header>
-  <h1>Sree Subha Sarees</h1>
-  <p>Professional Saree Draping & Pre-Pleating</p>
-  <p>Sugar Land & Houston, TX</p>
-  <a href="tel:13468296459" class="cta-btn"><i class="fas fa-phone"></i> Call Me</a>
-</header>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="brand">Sree Subha Sarees</div>
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#services">Services</a>
-  <a href="#why">Why Choose Us</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#contact">Contact</a>
-</nav>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <nav class="desktop-nav">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#why">Why Choose Us</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-<section id="home">
-  <h2>Elegant Saree Draping Made Easy</h2>
-  <p>
-    Looking flawless in a saree should be effortless. At Sree Subha Sarees, we offer
-    professional saree draping and pre‑pleating services so you can enjoy your special
-    moments without worry.
-  </p>
-</section>
-  <h2>Welcome</h2>
-  <p>
-    From stunning pleats to elegant draping and flawless ironing — we handle it all,
-    so you look effortlessly beautiful for every occasion.
-  </p>
-</section>
+      <a href="tel:13468296459" class="call-btn">
+        <i class="fa-solid fa-phone"></i> Call
+      </a>
 
-<section id="services">
-  <h2>Our Services</h2>
-  <div class="services">
-    <div class="card">
-      <h3>Saree Pre‑Pleating</h3>
-      <p>Neat, even pleats prepared in advance for comfort and confidence.</p>
-      <div class="price">Starting at $25</div>
-    </div>
-    <div class="card">
-      <h3>Saree Draping</h3>
-      <p>Professional draping for weddings, poojas, parties, and special occasions.</p>
-      <div class="price">$40</div>
+      <div class="menu-btn" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </div>
     </div>
   </div>
-</section>
 
-<section id="why">
-  <h2>Why Saree Draping & Pre‑Pleating by Subha</h2>
-  <div class="services">
-    <div class="card"><p>✔ Years of experience with traditional and modern draping styles</p></div>
-    <div class="card"><p>✔ Perfect pleats that stay intact all day</p></div>
-    <div class="card"><p>✔ Stress‑free service for weddings and events</p></div>
-    <div class="card"><p>✔ Trusted by local Houston families</p></div>
-  </div>
-</section>
+  <!-- SIDE MENU (MOBILE) -->
+  <nav class="side-menu" id="sideMenu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#why" onclick="toggleMenu()">Why Choose Us</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+  </nav>
 
-<section id="gallery">
-  <h2>Pre-Pleated Saree Gallery</h2>
-  <p>Here are examples of our neat and elegant pre-pleated saree work.</p>
-  <div class="services">
-    <div class="card">
-      <img src="sareeexam.jpg" alt="Pre-pleated saree" style="width:100%; border-radius:10px;">
-      <p>Custom pre-pleated saree prepared with precision and care.</p>
-    </div>
-  </div>
-</section>
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <h1>Saree Draping & Pre-Pleating in Sugar Land & Houston</h1>
+        <div class="hero-badges">
+          <div class="hero-badge">Bridal & Event Sarees</div>
+          <div class="hero-badge">Perfect, Neat Pleats</div>
+          <div class="hero-badge">Stress-Free Styling</div>
+        </div>
+        <p>
+          Look effortlessly elegant for every occasion. Sree Subha Sarees offers
+          professional saree draping and pre-pleated saree services so you feel
+          confident, comfortable, and beautifully styled for weddings, poojas, parties,
+          and festivals.
+        </p>
+        <div class="hero-cta-row">
+          <a href="tel:13468296459" class="primary-btn">
+            <i class="fa-solid fa-phone"></i> Call to Book
+          </a>
+          <a href="#services" class="secondary-link">View Services</a>
+        </div>
+      </div>
 
-<section id="about">
-  <h2>About Us</h2>
-  <p>
-    Sree Subha Sarees is a local Houston‑based service focused on preserving
-    the beauty and tradition of saree wear. We specialize in neat pleating and
-    elegant draping, helping our customers feel confident and comfortable.
-  </p>
-</section>
+      <div class="hero-image">
+        <div class="hero-image-inner">
+          Add a photo of your pre-pleated saree or draping work here (replace this box with an image).
+        </div>
+      </div>
+    </section>
 
-<section id="contact">
-  <h2>Contact Me</h2>
-  <div class="grid">
-    <div class="card"><div class="icon"><i class="fas fa-phone"></i></div><p><strong>Call:</strong><br>346-829-6459</p></div>
-    <div class="card"><div class="icon"><i class="fas fa-envelope"></i></div><p><strong>Email:</strong><br>subhadra.jayaharan@gmail.com</p></div>
-  </div>
-  <div class="map" style="margin-top:40px;">
-    <iframe src="https://www.google.com/maps?q=Sugar+Land+TX&output=embed"></iframe>
-  </div>
-</section>
-<script>
-function toggleMenu(){
-  const menu=document.getElementById('sideMenu');
-  menu.style.right = menu.style.right === '0px' ? '-260px' : '0px';
-}
-</script>
+    <!-- WHY CHOOSE US -->
+    <section id="why">
+      <h2 class="section-title">Why Saree Draping & Pre-Pleating by Subha?</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-star"></i></div>
+          <h3>Effortless Elegance</h3>
+          <p>I specialize in perfectly styled saree draping that gives you a flawless, graceful look with complete comfort.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fa-regular fa-clock"></i></div>
+          <h3>Save Time with Pre-Pleating</h3>
+          <p>Pre-pleated sarees are prepared in advance so you can get ready faster while still looking beautifully put together.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
+          <h3>Stress-Free, Friendly Service</h3>
+          <p>From trying styles to final draping, the experience is calm, patient, and focused on your comfort and confidence.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <h3>Local & Trusted</h3>
+          <p>Serving Sugar Land and Houston, TX with care and attention to detail for weddings, festivals, photoshoots, and special events.</p>
+        </div>
+      </div>
+    </section>
 
-<footer>
-  <p>© 2025 Sree Subha Sarees | Houston</p>
-</footer>
+    <!-- SERVICES -->
+    <section id="services">
+      <h2 class="section-title">Our Services</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+          <h3>Saree Draping</h3>
+          <p>Elegant traditional and modern saree draping styles customized for your body type, saree, and event.</p>
+          <p class="price-tag">From $40 per saree</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <h3>Pre-Pleated Sarees</h3>
+          <p>Neat, even pleats stitched and prepared in advance so you can simply tuck, drape, and go.</p>
+          <p class="price-tag">Starting at $25</p>
+        </div>
+      </div>
+    </section>
 
-<a class="whatsapp" href="https://wa.me/13468296459" target="_blank">WhatsApp Us</a>
+    <!-- GALLERY -->
+    <section id="gallery">
+      <h2 class="section-title">Pre-Pleated Saree Gallery</h2>
+      <p style="text-align:center;max-width:700px;margin:0 auto 18px;">
+        A glimpse of our neat pre-pleating and elegant draping work. Replace these boxes with your saree photos.
+      </p>
+      <div class="gallery-grid">
+        <!-- Replace these with your real images -->
+        <div class="gallery-item">
+          <!-- Example: <img src="saree1.jpg" alt="Pre-pleated saree"> -->
+        </div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+      </div>
+    </section>
 
+    <!-- CONTACT + MAP -->
+    <section id="contact">
+      <h2 class="section-title">Service Area & Contact</h2>
+      <div class="contact-layout">
+        <div class="contact-card">
+          <div class="contact-row">
+            <i class="fa-solid fa-location-dot"></i>
+            <span><strong>Service Area:</strong> Sugar Land & Houston, Texas</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-phone"></i>
+            <span><strong>Phone:</strong> 346-829-6459</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-envelope"></i>
+            <span><strong>Email:</strong> subhadra.jayaharan@gmail.com</span>
+          </div>
+          <div class="contact-row">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Message on WhatsApp for appointments and questions.</span>
+          </div>
+        </div>
+
+        <div>
+          <iframe
+            src="https://www.google.com/maps?q=Sugar+Land+TX&output=embed"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Sree Subha Sarees · Saree Draping & Pre-Pleating · Sugar Land & Houston, TX
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/13468296459"
+    target="_blank"
+    rel="noopener"
+  >
+    <i class="fa-brands fa-whatsapp"></i>
+    WhatsApp Us
+  </a>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("sideMenu");
+      menu.classList.toggle("open");
+    }
+  </script>
 </body>
 </html>
