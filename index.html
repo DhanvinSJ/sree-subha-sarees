@@ -6,16 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Fonts -->
-  <!-- Added Playfair Display for the main hero heading -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
+    html {
+      scroll-behavior: smooth; /* smooth scroll for View Services etc. */
+    }
+
     :root {
       --maroon: #7a1f3d;
       --gold: #d4af37;
-      --bg: #fff8f2;          /* same cream color as Wix */
+      --bg: #FBF8F1;          /* updated background to match Wix */
       --text: #333333;
       --accent: #2fa86c;
       --card: #ffffff;
@@ -41,9 +44,16 @@
     /* special style ONLY for the hero heading */
     .hero-title {
       font-family: "Playfair Display", "Times New Roman", serif;
-      color: #1f1f1f;          /* almost black, like Wix */
-      font-weight: 600;
+      color: #1f1f1f;          /* almost black */
+      font-weight: 700;        /* bolder */
       letter-spacing: 0.02em;
+    }
+
+    /* intro paragraph under hero heading */
+    .hero-lead {
+      font-style: italic;
+      color: #222222;          /* darker for readability */
+      font-size: 17px;
     }
 
     /* HEADER BAR */
@@ -68,7 +78,6 @@
       color: var(--maroon);
     }
 
-    /* hide the desktop menu – only hamburger everywhere */
     .desktop-nav {
       display: none;
       gap: 24px;
@@ -156,7 +165,6 @@
     }
 
     .hero-text p {
-      font-size: 17px;
       margin-bottom: 24px;
     }
 
@@ -258,6 +266,39 @@
       color: var(--maroon);
     }
 
+    /* ===== Why Choose section – bigger cards + 2x2 layout ===== */
+    #why .grid {
+      max-width: 900px;
+      margin: 0 auto;
+      gap: 32px;
+    }
+
+    #why .card {
+      padding: 32px 28px;
+      text-align: center;
+    }
+
+    #why .card-icon {
+      font-size: 44px;      /* bigger “emoji” icons */
+      margin-bottom: 16px;
+    }
+
+    #why h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    #why p {
+      font-size: 15px;
+    }
+
+    @media (min-width: 900px) {
+      #why .grid {
+        grid-template-columns: repeat(2, minmax(320px, 1fr)); /* 2 on top, 2 on bottom */
+      }
+    }
+    /* =============================================== */
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
@@ -343,13 +384,12 @@
       font-size: 18px;
     }
 
-    /* keep other responsive stuff the same */
     @media (min-width: 900px) {
       .desktop-nav {
         display: none;   /* still hidden on desktop */
       }
       .menu-btn {
-        display: block;  /* hamburger visible on desktop too */
+        display: block;
       }
     }
 
@@ -402,7 +442,7 @@
     </div>
   </div>
 
-  <!-- SIDE MENU (MOBILE / DESKTOP) -->
+  <!-- SIDE MENU -->
   <nav class="side-menu" id="sideMenu">
     <a href="#home" onclick="toggleMenu()">Home</a>
     <a href="#services" onclick="toggleMenu()">Services</a>
@@ -415,14 +455,13 @@
     <!-- HERO -->
     <section id="home" class="hero">
       <div class="hero-text">
-        <!-- added class="hero-title" but kept text the same -->
         <h1 class="hero-title">Saree Draping &amp; Pre-Pleating in Sugar Land &amp; Houston</h1>
         <div class="hero-badges">
           <div class="hero-badge">Bridal &amp; Event Sarees</div>
           <div class="hero-badge">Perfect, Neat Pleats</div>
           <div class="hero-badge">Stress-Free Styling</div>
         </div>
-        <p>
+        <p class="hero-lead">
           Look effortlessly elegant for every occasion. Sree Subha Sarees offers
           professional saree draping and pre-pleated saree services so you feel
           confident, comfortable, and beautifully styled for weddings, poojas, parties,
@@ -443,34 +482,34 @@
       </div>
     </section>
 
-    <!-- rest of the sections stay exactly the same as before -->
-
+    <!-- WHY -->
     <section id="why">
-      <h2 class="section-title">Why Saree Draping & Pre-Pleating by Subha?</h2>
+      <h2 class="section-title">Why Saree Draping &amp; Pre-Pleating by Subha?</h2>
       <div class="grid">
         <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-star"></i></div>
-          <h3>Effortless Elegance</h3>
+          <div class="card-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <h3>Effortless Elegance in Every Drape</h3>
           <p>I specialize in perfectly styled saree draping that gives you a flawless, graceful look with complete comfort.</p>
         </div>
         <div class="card">
-          <div class="card-icon"><i class="fa-regular fa-clock"></i></div>
-          <h3>Save Time with Pre-Pleating</h3>
-          <p>Pre-pleated sarees are prepared in advance so you can get ready faster while still looking beautifully put together.</p>
+          <div class="card-icon"><i class="fa-regular fa-hourglass-half"></i></div>
+          <h3>Save Time with Perfect Pre-Pleating</h3>
+          <p>My pre-pleating service ensures your saree is beautifully ready-to-wear — saving you time while keeping the style intact.</p>
         </div>
         <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
-          <h3>Stress-Free, Friendly Service</h3>
-          <p>From trying styles to final draping, the experience is calm, patient, and focused on your comfort and confidence.</p>
+          <div class="card-icon"><i class="fa-solid fa-sparkles"></i></div>
+          <h3>Stunning Looks for Every Special Moment</h3>
+          <p>Whether it’s a wedding, festival, or celebration, I help you look radiant, confident, and beautifully dressed.</p>
         </div>
         <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
-          <h3>Local & Trusted</h3>
-          <p>Serving Sugar Land and Houston, TX with care and attention to detail for weddings, festivals, photoshoots, and special events.</p>
+          <div class="card-icon"><i class="fa-solid fa-crown"></i></div>
+          <h3>Bridal-Perfect Finish</h3>
+          <p>With a focus on precision and detail, I create bridal drapes that enhance your saree and highlight your natural beauty.</p>
         </div>
       </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="services">
       <h2 class="section-title">Our Services</h2>
       <div class="grid">
@@ -489,6 +528,7 @@
       </div>
     </section>
 
+    <!-- GALLERY -->
     <section id="gallery">
       <h2 class="section-title">Pre-Pleated Saree Gallery</h2>
       <p style="text-align:center;max-width:700px;margin:0 auto 18px;">
@@ -502,13 +542,14 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
-      <h2 class="section-title">Service Area & Contact</h2>
+      <h2 class="section-title">Service Area &amp; Contact</h2>
       <div class="contact-layout">
         <div class="contact-card">
           <div class="contact-row">
             <i class="fa-solid fa-location-dot"></i>
-            <span><strong>Service Area:</strong> Sugar Land & Houston, Texas</span>
+            <span><strong>Service Area:</strong> Sugar Land &amp; Houston, Texas</span>
           </div>
           <div class="contact-row">
             <i class="fa-solid fa-phone"></i>
@@ -535,7 +576,7 @@
   </main>
 
   <footer>
-    © 2025 Sree Subha Sarees · Saree Draping & Pre-Pleating · Sugar Land & Houston, TX
+    © 2025 Sree Subha Sarees · Saree Draping &amp; Pre-Pleating · Sugar Land &amp; Houston, TX
   </footer>
 
   <a
