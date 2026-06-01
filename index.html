@@ -623,10 +623,13 @@
 
   /* ── ANIMATIONS ── */
   .fade-up {
-    opacity: 0; transform: translateY(30px);
+    opacity: 1; transform: translateY(0);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up.animate-ready {
+    opacity: 0; transform: translateY(30px);
+  }
+  .fade-up.animate-ready.visible { opacity: 1; transform: translateY(0); }
   .fade-up-d1 { transition-delay: 0.15s; }
   .fade-up-d2 { transition-delay: 0.3s; }
   .fade-up-d3 { transition-delay: 0.45s; }
@@ -1506,6 +1509,7 @@
   }
 
   // Intersection Observer for fade-up animations
+  // Only applies animation to elements below the fold on page load
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1513,16 +1517,16 @@
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+  }, { threshold: 0.05 });
 
   document.querySelectorAll('.fade-up').forEach(el => {
     const rect = el.getBoundingClientRect();
-    // If already visible in viewport on load, show immediately
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      el.classList.add('visible');
-    } else {
+    if (rect.top >= window.innerHeight) {
+      // Only hide elements that are genuinely below the fold
+      el.classList.add('animate-ready');
       observer.observe(el);
     }
+    // Elements in view or above fold stay visible always
   });
 
   // Contact form → real email
