@@ -616,15 +616,13 @@
     opacity: 1; transform: translateY(0);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
-  .fade-up {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.75s ease, transform 0.75s ease;
+  ..animate-ready {
+    opacity: 0; transform: translateY(30px);
   }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-up-d1 { transition-delay: 0.15s; }
-  .fade-up-d2 { transition-delay: 0.3s; }
-  .fade-up-d3 { transition-delay: 0.45s; }
+  ..animate-ready.visible { opacity: 1; transform: translateY(0); }
+  . { transition-delay: 0.15s; }
+  . { transition-delay: 0.3s; }
+  . { transition-delay: 0.45s; }
 
   /* ── HAMBURGER BUTTON ── */
   .hamburger {
@@ -817,7 +815,8 @@
   </div>
   <div class="hero-right">
     <div class="hero-img-frame">
-      <div class="hero-img-placeholder">
+      <img src="hero-saree.jpg" alt="Bridal saree draping in Sugar Land, Houston by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <div class="hero-img-placeholder" style="display:none;">
         <span class="sari-icon">🥻</span>
         <p>Sree Subha Sarees</p>
       </div>
@@ -862,22 +861,22 @@
   <div class="section-eyebrow">The Sree Subha Difference</div>
   <h2 class="section-title">Why Women Choose <em>Subha</em></h2>
   <div class="why-grid">
-    <div class="why-card fade-up">
+    <div class="why-card">
       <span class="why-icon">✅</span>
       <h3 class="why-head">Effortless Elegance in Every Drape</h3>
       <p class="why-text">Every pleat is placed with care so your saree falls gracefully and looks picture-perfect from start to finish.</p>
     </div>
-    <div class="why-card fade-up fade-up-d1">
+    <div class="why-card">
       <span class="why-icon">⏱️</span>
       <h3 class="why-head">Save Time with Perfect Pre-Pleating</h3>
       <p class="why-text">Pre-pleated sarees mean faster getting-ready time, less stress, and more moments to enjoy with family and friends.</p>
     </div>
-    <div class="why-card fade-up fade-up-d2">
+    <div class="why-card">
       <span class="why-icon">✨</span>
       <h3 class="why-head">Styled for Every Special Moment</h3>
       <p class="why-text">Bridal, festive, or casual — each look is styled to match your personality and the mood of your event.</p>
     </div>
-    <div class="why-card fade-up fade-up-d3">
+    <div class="why-card">
       <span class="why-icon">👑</span>
       <h3 class="why-head">Friendly, Calm &amp; Detail-Focused</h3>
       <p class="why-text">From pinning to final touch-ups, you'll feel comfortable, heard, and fully cared for throughout the entire process.</p>
@@ -892,8 +891,9 @@
   <div class="collection-grid">
 
     <!-- Fancy Sarees -->
-    <div class="uni-card fade-up">
+    <div class="uni-card">
       <div class="uni-card-img">
+        <img src="sale1.jpg" alt="Fancy sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
         <span class="uni-card-tag">Featured</span>
       </div>
       <div class="uni-card-body">
@@ -923,8 +923,9 @@
     </div>
 
     <!-- Budget Sarees -->
-    <div class="uni-card fade-up fade-up-d1">
+    <div class="uni-card">
       <div class="uni-card-img" style="background:linear-gradient(160deg,#2a3a5c,#0f1a30);">
+        <img src="sale2.jpg" alt="Budget sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
         <span class="uni-card-tag">Best Value</span>
       </div>
       <div class="uni-card-body">
@@ -963,12 +964,10 @@
   <div class="services-grid">
 
     <!-- Saree Draping -->
-    <div class="uni-card fade-up">
+    <div class="uni-card">
       <div class="uni-card-img">
+        <img src="saree-draping.jpg" alt="Professional saree draping Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
       </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Saree Draping</div>
           <div class="uni-card-meta">1 Hour</div>
         </div>
         <div class="uni-card-price">$40</div>
@@ -996,8 +995,9 @@
     </div>
 
     <!-- Pre-Pleated Saree -->
-    <div class="uni-card fade-up fade-up-d1">
+    <div class="uni-card">
       <div class="uni-card-img" style="background:linear-gradient(160deg,#1e3a5f,#0a1a30);">
+        <img src="pre-pleated-saree.jpg" alt="Pre-pleated saree service Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
       </div>
       <div class="uni-card-body">
         <div>
@@ -1036,23 +1036,29 @@
   <div class="section-eyebrow">Our Work</div>
   <h2 class="section-title">A Glimpse of <em>Elegance</em></h2>
   <div class="gallery-grid">
-    <div class="gallery-cell fade-up" style="background:linear-gradient(135deg,#4a1528,#1a0f0a);">
-      🥻<span class="gallery-label">Bridal Draping</span>
+    <div class="gallery-cell" style="background:linear-gradient(135deg,#4a1528,#1a0f0a);">
+      <img src="gallery3.png" alt="Bridal saree draping by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';" />
+      <span class="gallery-label">Bridal Draping</span>
     </div>
-    <div class="gallery-cell fade-up fade-up-d1" style="background:linear-gradient(135deg,#1e3a5f,#0a1a30);">
-      🪷<span class="gallery-label">Pre-Pleated</span>
+    <div class="gallery-cell" style="background:linear-gradient(135deg,#1e3a5f,#0a1a30);">
+      <img src="gallery4.png" alt="Pre-pleated saree by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';" />
+      <span class="gallery-label">Pre-Pleated</span>
     </div>
-    <div class="gallery-cell fade-up fade-up-d2" style="background:linear-gradient(135deg,#2a1a0f,#1a0f05);">
-      ✨<span class="gallery-label">Festival Look</span>
+    <div class="gallery-cell" style="background:linear-gradient(135deg,#2a1a0f,#1a0f05);">
+      <img src="gallery5.png" alt="Festival saree look by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';" />
+      <span class="gallery-label">Festival Look</span>
     </div>
-    <div class="gallery-cell fade-up fade-up-d3" style="background:linear-gradient(135deg,#1a2a1a,#0f1f0f);">
-      🌸<span class="gallery-label">Pooja Style</span>
+    <div class="gallery-cell" style="background:linear-gradient(135deg,#1a2a1a,#0f1f0f);">
+      <img src="gallery6.png" alt="Pooja style saree by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';" />
+      <span class="gallery-label">Pooja Style</span>
     </div>
-    <div class="gallery-cell fade-up fade-up-d1" style="background:linear-gradient(135deg,#3a1a3a,#1a0f1a);">
-      💐<span class="gallery-label">Party Draping</span>
+    <div class="gallery-cell" style="background:linear-gradient(135deg,#3a1a3a,#1a0f1a);">
+      <img src="sareeexam.jpg" alt="Party saree draping by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';" />
+      <span class="gallery-label">Party Draping</span>
     </div>
-    <div class="gallery-cell fade-up fade-up-d2" style="background:linear-gradient(135deg,#4a1528,#2d0d1f);">
-      🥻<span class="gallery-label">Fancy Sarees</span>
+    <div class="gallery-cell" style="background:linear-gradient(135deg,#4a1528,#2d0d1f);">
+      <img src="pre-pleated-saree.jpg" alt="Fancy sarees by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';" />
+      <span class="gallery-label">Fancy Sarees</span>
     </div>
   </div>
 </section>
@@ -1512,17 +1518,6 @@
       btn.style.background = '';
     }, 3000);
   }
-
-  // ── Fade-up on scroll ──
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        fadeObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
 
   // Smooth nav highlighting
   var sections = document.querySelectorAll('section[id]');
