@@ -415,8 +415,7 @@
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: 520px;
+    grid-template-columns: repeat(4, 1fr);
     gap: 6px; margin-top: 3rem;
   }
   .gallery-cell {
@@ -426,11 +425,11 @@
   }
   .gallery-cell img { width:100%; height:100%; object-fit:cover; object-position: center top; display:block; }
   .gallery-cell:hover { opacity: 0.88; }
-  /* Rect=span2 (narrow tall), Square=span3 (wider) → 2+3+2+3 = 10... use 2+3+2+3=10 cols */
-  .gallery-cell:nth-child(1) { grid-column: span 2; }
-  .gallery-cell:nth-child(2) { grid-column: span 3; }
-  .gallery-cell:nth-child(3) { grid-column: span 2; }
-  .gallery-cell:nth-child(4) { grid-column: span 3; }
+  /* All same width, rectangles taller */
+  .gallery-cell:nth-child(1),
+  .gallery-cell:nth-child(3) { height: 580px; }
+  .gallery-cell:nth-child(2),
+  .gallery-cell:nth-child(4) { height: 420px; }
 
   .gallery-label {
     position: absolute; bottom: 1rem; left: 1rem;
@@ -736,7 +735,9 @@
     }
     .uni-card-img { height: 220px; }
     .collection-grid, .services-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: repeat(10, 1fr); grid-template-rows: 180px; }
+    .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    .gallery-cell:nth-child(1), .gallery-cell:nth-child(3) { height: 260px; }
+    .gallery-cell:nth-child(2), .gallery-cell:nth-child(4) { height: 190px; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 1.5rem; }
     .hero-stats { gap: 1.5rem; }
     #services::before { display: none; }
