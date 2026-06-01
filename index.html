@@ -728,16 +728,16 @@
     .hamburger { display: flex; }
     #hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 8rem 2rem 3rem; }
-    .hero-right { display: none; }
+    .hero-right { display: block; }
     section { padding: 5rem 2rem; }
     .why-grid, .collection-grid, .services-grid, .contact-grid {
       grid-template-columns: 1fr;
     }
     .uni-card-img { height: 220px; }
     .collection-grid, .services-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: repeat(4, 1fr); }
-    .gallery-cell:nth-child(1), .gallery-cell:nth-child(3) { height: 260px; }
-    .gallery-cell:nth-child(2), .gallery-cell:nth-child(4) { height: 190px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-cell:nth-child(1), .gallery-cell:nth-child(3) { height: 420px; }
+    .gallery-cell:nth-child(2), .gallery-cell:nth-child(4) { height: 300px; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 1.5rem; }
     .hero-stats { gap: 1.5rem; }
     #services::before { display: none; }
