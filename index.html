@@ -1520,13 +1520,13 @@
   }, { threshold: 0.05 });
 
   document.querySelectorAll('.fade-up').forEach(el => {
+    // Never apply animation to detail panels - they have their own show/hide logic
+    if (el.classList.contains('detail-panel') || el.closest('.detail-panel')) return;
     const rect = el.getBoundingClientRect();
     if (rect.top >= window.innerHeight) {
-      // Only hide elements that are genuinely below the fold
       el.classList.add('animate-ready');
       observer.observe(el);
     }
-    // Elements in view or above fold stay visible always
   });
 
   // Contact form → real email
