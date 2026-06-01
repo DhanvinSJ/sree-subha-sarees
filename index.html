@@ -1303,7 +1303,7 @@
 
   @media (max-width: 900px) {
     .t-track { padding: 0 1.5rem; }
-    .t-card { flex: 0 0 280px; }
+    .t-card { flex: 0 0 calc(100vw - 3rem); }
     #testimonials > div:first-child { padding: 0 1.5rem; }
     .t-dots, .t-dots + div { padding: 0 1.5rem; }
   }
@@ -1314,11 +1314,16 @@
     const track = document.getElementById('tTrack');
     const dotsContainer = document.getElementById('tDots');
     const cards = track.querySelectorAll('.t-card');
-    const cardWidth = 340 + 24; // card + gap
-    const visibleCount = Math.floor(window.innerWidth / cardWidth) || 1;
-    const maxIndex = cards.length - visibleCount;
+    const gap = 24;
+    function getCardWidth() {
+      return cards[0].offsetWidth + gap;
+    }
+    function getVisibleCount() {
+      return Math.max(1, Math.floor(window.innerWidth / getCardWidth()));
+    }
     let current = 0;
     let autoTimer;
+    let maxIndex = cards.length - getVisibleCount();
 
     // Build dots
     cards.forEach((_, i) => {
@@ -1330,8 +1335,9 @@
     });
 
     function goTo(idx) {
+      maxIndex = cards.length - getVisibleCount();
       current = Math.max(0, Math.min(idx, maxIndex));
-      const offset = current * cardWidth;
+      const offset = current * getCardWidth();
       track.style.transform = `translateX(-${offset}px)`;
       dotsContainer.querySelectorAll('.t-dot').forEach((d, i) => {
         d.classList.toggle('active', i === current);
