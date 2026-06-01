@@ -1439,9 +1439,7 @@
         <label>Message</label>
         <textarea id="f-message" placeholder="Tell us more about your event date, style preferences, or any questions..."></textarea>
       </div>
-      <button class="btn-submit" onclick="this.textContent='✓ Message Sent! We\'ll call you soon.'; this.style.background='linear-gradient(135deg,#2a5a2a,#1a3a1a)';">
-        Send Message
-      </button>
+      <button class="btn-submit" onclick="sendWhatsApp()">💬 Send via WhatsApp</button>
     </div>
   </div>
 
@@ -1545,7 +1543,17 @@
 </script>
 
 <script>
-  // ── SCROLL REVEAL ──
+  // ── CONTACT FORM → WHATSAPP ──
+  function sendWhatsApp() {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const service = document.getElementById('f-service').value;
+    const occasion = document.getElementById('f-occasion').value.trim();
+    const message = document.getElementById('f-message').value.trim();
+    if (!name) { alert('Please enter your name.'); return; }
+    const text = `Hi! I'd like to enquire about Sree Subha Sarees.%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone || 'Not provided')}%0A*Service:* ${encodeURIComponent(service || 'Not selected')}%0A*Occasion:* ${encodeURIComponent(occasion || 'Not specified')}%0A*Message:* ${encodeURIComponent(message || 'No message')}`;
+    window.open('https://wa.me/13468296459?text=' + text, '_blank');
+  }
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
