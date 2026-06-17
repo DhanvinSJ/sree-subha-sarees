@@ -727,7 +727,8 @@
     .hamburger { display: flex; }
     #hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 8rem 2rem 3rem; }
-    .hero-right { display: block; }
+    .hero-right { display: block; height: auto; padding: 2rem 2rem 3rem; }
+    .hero-img-frame { width: 100%; max-width: 380px; height: 420px; margin: 0 auto; }
     section { padding: 5rem 2rem; }
     .why-grid, .collection-grid, .services-grid, .contact-grid {
       grid-template-columns: 1fr;
@@ -739,10 +740,13 @@
     .gallery-cell:nth-child(2), .gallery-cell:nth-child(4) { height: 300px; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 1.5rem; }
     .hero-stats { gap: 1.5rem; }
+    .scroll-hint { left: 2rem; bottom: 1.5rem; }
     #services::before { display: none; }
     #testimonials { padding: 5rem 0 !important; }
     #testimonials > div:first-child { padding: 0 1.5rem !important; }
     .t-dots { padding: 0 1.5rem !important; }
+    #gallery > div:first-child { padding: 0 1.5rem !important; }
+    #gallery { padding: 3.5rem 0 !important; }
     .hero-stats { flex-wrap: wrap; }
     .contact-grid { gap: 3rem; }
   }
@@ -1199,7 +1203,8 @@
   .g-dot.active { background:var(--gold); width:24px; border-radius:4px; }
   @media (max-width:900px) {
     .g-track { padding:0 1.5rem; gap:0.75rem; }
-    .g-cell { flex:0 0 calc(100vw - 3rem) !important; height:360px !important; align-self:auto !important; }
+    .g-cell { flex:0 0 calc(100vw - 3rem) !important; height:420px !important; align-self:auto !important; }
+    .g-cell:nth-child(2), .g-cell:nth-child(4) { height:300px !important; }
   }
 </style>
 
@@ -1263,7 +1268,7 @@
       <div style="display:flex;gap:0.2rem;">
         <span style="color:var(--gold);font-size:1.1rem;">★★★★★</span>
       </div>
-      <span style="font-size:0.8rem;color:var(--muted);letter-spacing:0.08em;">5.0 on Google · 15 Reviews</span>
+      <span style="font-size:0.8rem;color:var(--muted);letter-spacing:0.08em;">5.0 on Google · 17 Reviews</span>
     </div>
   </div>
 
