@@ -396,6 +396,11 @@
     font-size: 4rem; color: rgba(201,168,76,0.2);
     overflow: hidden; flex-shrink: 0; position: relative;
   }
+  .uni-card-soon {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.1rem; color: var(--gold-pale); letter-spacing: 0.05em;
+  }
   .uni-card-img img {
     width: 100%; height: 100%; object-fit: cover; display: block;
   }
@@ -1072,11 +1077,11 @@
 <!-- SAREE COLLECTION -->
 <section id="sales">
   <div class="section-eyebrow">Curated Collection</div>
-  <h2 class="section-title">Beautiful Sarees for <em>Every Budget</em></h2>
+  <h2 class="section-title">Sarees &amp; More for <em>Every Budget</em></h2>
   <div class="collection-grid">
 
     <!-- Lightweight Designer Sarees -->
-    <div class="uni-card fade-up fade-up-d2">
+    <div class="uni-card fade-up">
       <div class="uni-card-img" style="background:linear-gradient(160deg,#1a2d3a,#0a1520);">
         <img src="sale3.jpg" alt="Lightweight designer sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
         <span class="uni-card-tag">New</span>
@@ -1101,7 +1106,7 @@
     </div>
 
     <!-- Fancy Sarees -->
-    <div class="uni-card fade-up">
+    <div class="uni-card fade-up fade-up-d1">
       <div class="uni-card-img">
         <img src="sale1.jpg" alt="Fancy sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
         <span class="uni-card-tag">Featured</span>
@@ -1125,7 +1130,7 @@
     </div>
 
     <!-- Budget Sarees -->
-    <div class="uni-card fade-up fade-up-d1">
+    <div class="uni-card fade-up fade-up-d2">
       <div class="uni-card-img" style="background:linear-gradient(160deg,#3d1020,#280a15);">
         <img src="sale2.jpg" alt="Budget sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
         <span class="uni-card-tag">Best Value</span>
@@ -1148,8 +1153,158 @@
       </div>
     </div>
 
-    <!-- Cotton T-Shirts -->
+    <!-- Pure Cotton Sarees -->
     <div class="uni-card fade-up fade-up-d3">
+      <div class="uni-card-img" style="background:linear-gradient(160deg,#3d1020,#280a15);">
+        <img src="pure-cotton-saree.jpg" alt="Pure cotton sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">Pure Cotton Sarees</div>
+          <div class="uni-card-meta">Breathable everyday comfort</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-cotton', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-cotton">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Our pure cotton sarees are soft, breathable, and perfect for Houston's warm weather. Light on the body and easy to drape, they are ideal for daily wear, office, temple visits, and casual gatherings.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">Choose from traditional woven borders, classic checks, and vibrant solid colours. Cotton gets softer with every wash and holds pleats beautifully — a timeless favourite for every wardrobe.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Silk-Cotton Sarees -->
+    <div class="uni-card fade-up">
+      <div class="uni-card-img" style="background:linear-gradient(160deg,#1a2d3a,#0a1520);">
+        <img src="silk-cotton-saree.jpg" alt="Silk cotton sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">Silk-Cotton Sarees</div>
+          <div class="uni-card-meta">The best of silk & cotton</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-silkcotton', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-silkcotton">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Silk-cotton sarees blend the rich sheen of silk with the lightness and comfort of cotton. They drape gracefully, feel airy all day, and look elegant without being heavy.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">Perfect for poojas, festivals, family functions, and work events. Available in bright colours with zari borders, ikat patterns, and tasselled pallus.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Art Silk Sarees -->
+    <div class="uni-card fade-up fade-up-d1">
+      <div class="uni-card-img" style="background:linear-gradient(160deg,#4a1528,#3a0d1e);">
+        <img src="art-silk-saree.jpg" alt="Art silk sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">Art Silk Sarees</div>
+          <div class="uni-card-meta">Rich look, easy care</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-artsilk', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-artsilk">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Art silk sarees give you the grand look of traditional silk with zari motifs and woven borders, at a price that's easy on the budget. They are lightweight and much easier to maintain than pure silk.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">A wonderful choice for weddings, receptions, festivals, and gifting. Available in a range of rich colours and designs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 Yard Cotton Sarees -->
+    <div class="uni-card fade-up fade-up-d2">
+      <div class="uni-card-img" style="background:linear-gradient(160deg,#3a1020,#280810);">
+        <img src="nine-yard-saree.jpg" alt="9 yard cotton madisar sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">9 Yard Cotton Sarees</div>
+          <div class="uni-card-meta">Madisar & traditional drapes</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-nineyard', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-nineyard">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Our 9 yard cotton sarees are made for traditional drapes like the Madisar, worn for weddings, Seemantham, poojas, and other auspicious occasions.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">Made from soft, breathable cotton with classic temple and woven borders, they are comfortable to wear through long ceremonies. Not sure how to wear a 9 yard saree? We also offer professional draping so you look perfect on your special day.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kurtis -->
+    <div class="uni-card fade-up fade-up-d3">
+      <div class="uni-card-img" style="background:linear-gradient(160deg,#1a2d3a,#0a1520);">
+        <img src="kurti.jpg" alt="Kurtis for women Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;object-position:center 20%;" onerror="this.style.display='none';" />
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">Kurtis</div>
+          <div class="uni-card-meta">Everyday ethnic wear</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-kurtis', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-kurtis">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Comfortable and stylish kurtis for work, college, casual outings, and festive days. Made from soft, breathable fabrics with beautiful embroidery and prints.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">Pair them with leggings, pants, or palazzos for an easy, elegant look. Available in a variety of colours, designs, and sizes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Readymade Blouses -->
+    <div class="uni-card fade-up">
+      <div class="uni-card-img" style="background:linear-gradient(160deg,#4a1528,#3a0d1e);">
+        <div class="uni-card-soon"><span>Photo coming soon</span></div>
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">Readymade Blouses</div>
+          <div class="uni-card-meta">Ready to wear, perfect fit</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-blouses', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-blouses">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Save time with our readymade saree blouses — no tailoring needed. Simply pick your size and colour and you're ready to go.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">Available in a range of sizes, colours, and styles to match or contrast with your saree, from simple everyday blouses to festive designs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cotton T-Shirts -->
+    <div class="uni-card fade-up fade-up-d1">
       <div class="uni-card-img" style="background:linear-gradient(160deg,#2a2a2a,#151515);">
         <img src="sale4.jpg" alt="100% cotton t-shirts for women Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
         <span class="uni-card-tag">New</span>
@@ -1169,6 +1324,31 @@
           <div class="detail-section-title">Collection Details</div>
           <p class="detail-text">Our 100% cotton t-shirts for women are made for everyday comfort without compromising on style. Soft, breathable, and durable, these tees are perfect for casual outings, lounging at home, or layering under your favourite outfit.</p>
           <p class="detail-text" style="margin-top:0.7rem;">Available in a variety of designs, colors, and prints to suit every taste, and offered in every size — Medium, Large, X-Large, and XX-Large — so there's a perfect fit for everyone.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dhotis -->
+    <div class="uni-card fade-up fade-up-d2">
+      <div class="uni-card-img" style="background:#f4f2ef;">
+        <img src="dhoti.jpg" alt="Traditional dhotis for men Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
+        <span class="uni-card-tag">New</span>
+      </div>
+      <div class="uni-card-body">
+        <div>
+          <div class="uni-card-name">Dhotis</div>
+          <div class="uni-card-meta">Traditional menswear</div>
+        </div>
+        <div class="uni-card-price">Available Now</div>
+      </div>
+      <div class="uni-card-footer">
+        <button class="more-info-btn" onclick="togglePanel('panel-dhotis', this)">More Info <span class="arrow">→</span></button>
+      </div>
+      <div class="detail-panel" id="panel-dhotis">
+        <div class="collection-detail-inner">
+          <div class="detail-section-title">Collection Details</div>
+          <p class="detail-text">Classic dhotis for men, perfect for weddings, poojas, temple visits, and festivals. Comfortable, breathable, and easy to wear.</p>
+          <p class="detail-text" style="margin-top:0.7rem;">Available in traditional white and cream with elegant gold zari and coloured borders.</p>
         </div>
       </div>
     </div>
@@ -1887,7 +2067,14 @@
           <option>Lightweight Designer Sarees</option>
           <option>Fancy Sarees</option>
           <option>Budget Sarees</option>
+          <option>Pure Cotton Sarees</option>
+          <option>Silk-Cotton Sarees</option>
+          <option>Art Silk Sarees</option>
+          <option>9 Yard Cotton Sarees</option>
+          <option>Kurtis</option>
+          <option>Readymade Blouses</option>
           <option>100% Cotton T-Shirts</option>
+          <option>Dhotis</option>
         </select>
       </div>
       <div class="form-row">
@@ -1922,7 +2109,7 @@
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
   </div>
-  <div class="footer-copy">© 2025 Sree Subha Sarees. All rights reserved.</div>
+  <div class="footer-copy">© 2026 Sree Subha Sarees. All rights reserved.</div>
 </footer>
 
 <!-- FLOATING CALL BUTTON -->
