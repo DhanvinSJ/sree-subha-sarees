@@ -34,11 +34,10 @@ Nothing on sreesubhasarees.com changes until the last step below.
 
 ## Turn it on for the website
 
-At the bottom of `index.html`, put your worker's address into this line and
-remove the `<!--` and `-->` around it:
+This line at the bottom of `index.html` loads the chat bubble from the worker:
 
 ```html
-<script src="https://sree-subha-chat.YOUR-NAME.workers.dev/widget.js" defer></script>
+<script src="https://sree-subha-chat.dhanvins-jayaharan.workers.dev/widget.js" defer></script>
 ```
 
 ## Changing what it knows
@@ -49,5 +48,4 @@ again and click **Deploy**. The website does not need to change.
 
 ## Turning it off
 
-Put the `<!--` and `-->` back around the script line in `index.html`, or
-delete the worker in Cloudflare.
+Delete the script line in `index.html`, or delete the worker in Cloudflare.
