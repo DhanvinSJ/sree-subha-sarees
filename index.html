@@ -765,8 +765,36 @@
   }
   .menu-overlay.visible { opacity: 1; pointer-events: auto; }
 
+  /* ── DIWALI OFFER BANNER ── */
+  .festive-banner {
+    position: relative; overflow: hidden;
+    background: radial-gradient(circle at 15% 50%, rgba(232,201,122,0.18), transparent 40%),
+                radial-gradient(circle at 85% 50%, rgba(232,201,122,0.18), transparent 40%),
+                var(--deep);
+    border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
+    padding: 2.5rem 6rem; color: var(--cream);
+    display: flex; align-items: center; justify-content: center; gap: 2.5rem; text-align: center;
+  }
+  .festive-lamp { font-size: 2.6rem; filter: drop-shadow(0 0 12px rgba(255,190,80,0.8)); animation: lampGlow 2.4s ease-in-out infinite; }
+  @keyframes lampGlow { 50% { filter: drop-shadow(0 0 22px rgba(255,190,80,1)); } }
+  .festive-eyebrow { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold-light); line-height: 1; }
+  .festive-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; margin: 0.4rem 0; }
+  .festive-title strong { color: var(--gold-light); font-weight: 600; }
+  .festive-desc { font-size: 0.9rem; color: rgba(253,246,238,0.8); letter-spacing: 0.03em; }
+  .festive-actions { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.2rem; }
+  .festive-btn {
+    display: inline-block; padding: 0.75rem 1.6rem; font-size: 0.75rem; letter-spacing: 0.15em;
+    text-transform: uppercase; text-decoration: none; border: 1px solid var(--gold-light);
+    color: var(--deep); background: var(--gold-light); transition: transform 0.2s;
+  }
+  .festive-btn.ghost { background: transparent; color: var(--gold-light); }
+  .festive-btn:hover { transform: translateY(-2px); }
+  .festive-fine { font-size: 0.7rem; color: rgba(253,246,238,0.55); margin-top: 0.9rem; }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
+    .festive-banner { padding: 2rem 1.5rem; gap: 1rem; }
+    .festive-lamp { display: none; }
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .nav-cta { display: none; }
@@ -906,6 +934,25 @@
     Scroll to explore
   </div>
 </section>
+
+<!-- DIWALI OFFER (hides itself after the end date in the script below) -->
+<div class="festive-banner" id="festiveBanner">
+  <div class="festive-lamp" aria-hidden="true">🪔</div>
+  <div>
+    <div class="festive-eyebrow">Happy Diwali</div>
+    <div class="festive-title">Celebrate in a new saree: <strong>10% off</strong> your first purchase</div>
+    <div class="festive-desc">Valid on our whole saree collection for first-time customers, through November 15.</div>
+    <div class="festive-actions">
+      <a href="#sales" class="festive-btn">See the Collection</a>
+      <a href="https://wa.me/13468296459?text=Hi%20Subhadra!%20I%27d%20like%20to%20use%20the%20Diwali%2010%25%20first%20purchase%20offer." target="_blank" rel="noopener" class="festive-btn ghost">Claim on WhatsApp</a>
+    </div>
+    <div class="festive-fine">One per customer. Mention the Diwali offer when you book.</div>
+  </div>
+  <div class="festive-lamp" aria-hidden="true">🪔</div>
+</div>
+<script>
+  if (new Date() > new Date('2026-11-16T00:00:00-06:00')) document.getElementById('festiveBanner').remove();
+</script>
 
 <!-- MARQUEE -->
 <div class="marquee-strip" aria-hidden="true">
