@@ -41,801 +41,462 @@
 <link rel="icon" href="favicon.ico" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-pale: #f5e9c8;
-    --deep: #4a1528;
+    /* brand colours: wine and gold, on a bone ground */
     --wine: #4a1528;
-    --cream: #fdf6ee;
-    --text: #2d1a10;
-    --muted: #7a5c48;
+    --plum: #2e0c19;
+    --gold: #c9a84c;
+    --gold-pale: #efe2bf;
+    --bg: #f4efe9;
+    --surface: #e9e0d6;
+    --sand: #ddd0c0;
+    --ink: #2b1419;
+    --muted: #6a4f56;
+    --on-dark: #f6efe4;
+    --on-dark-soft: #dccbb8;
+
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', system-ui, sans-serif;
+
+    /* five sizes */
+    --t-display: clamp(3rem, 5.6vw, 5.75rem);
+    --t-head: clamp(2.25rem, 4vw, 3.75rem);
+    --t-lead: clamp(1.375rem, 1.6vw, 1.625rem);
+    --t-body: 1.0625rem;
+    --t-small: 0.875rem;
+
+    --m: clamp(20px, 5vw, 80px);
+    --gap-section: clamp(88px, 11vw, 168px);
+    --nav-h: 72px;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  html { scroll-behavior: smooth; }
-
+  html { scroll-padding-top: var(--nav-h); }
   body {
-    font-family: 'Jost', sans-serif;
-    background: #4a1528;
-    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--t-body);
+    line-height: 1.55;
+    background: var(--bg);
+    color: var(--ink);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  ::selection { background: var(--gold); color: var(--plum); }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: var(--t-head); }
+  .lead { font-size: var(--t-lead); font-family: var(--serif); line-height: 1.3; }
+
+  .wrap { padding-left: var(--m); padding-right: var(--m); }
+  section { padding: var(--gap-section) var(--m); }
+
+  /* buttons: one shape, square, flat */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    min-height: 52px; padding: 0 1.6rem;
+    font-family: var(--sans); font-size: var(--t-body); font-weight: 500;
+    text-decoration: none; border: 0; cursor: pointer;
+    transition: transform 0.2s var(--ease), background-color 0.2s, color 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0) scale(0.98); }
+  .btn-gold { background: var(--gold); color: var(--plum); }
+  .btn-gold:hover { background: #d8b95e; }
+  .btn-wine { background: var(--wine); color: var(--on-dark); }
+  .btn-wine:hover { background: var(--plum); }
+  .btn-wa { background: #25d366; color: #06301a; }
+  .btn-wa:hover { background: #3ee07b; }
+  .btn-quiet { background: rgba(246,239,228,0.12); color: var(--on-dark); }
+  .btn-quiet:hover { background: rgba(246,239,228,0.2); }
+  .btn svg { width: 1.15rem; height: 1.15rem; flex: none; }
+
+  .text-link {
+    font-weight: 500; text-decoration: underline; text-decoration-thickness: 2px;
+    text-underline-offset: 5px; text-decoration-color: var(--gold);
+    transition: text-underline-offset 0.2s, color 0.2s;
+  }
+  .text-link:hover { text-underline-offset: 8px; }
 
   /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(74,21,40,0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.2);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    padding: 0 var(--m); background: var(--wine);
   }
   .nav-brand {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem; font-weight: 400; letter-spacing: 0.02em;
-    color: var(--gold-light);
-    text-decoration: none;
-    line-height: 1;
+    font-family: var(--serif); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--on-dark); text-decoration: none; white-space: nowrap;
   }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
-    color: rgba(245,233,200,0.75); font-size: 0.8rem;
-    font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase;
-    text-decoration: none; transition: color 0.3s;
+    color: var(--on-dark-soft); font-size: 1rem; text-decoration: none;
+    transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    padding: 0.55rem 1.4rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    text-decoration: none; cursor: pointer;
-    transition: all 0.3s;
-  }
-  .nav-cta:hover { background: var(--gold); color: var(--deep); }
+  .nav-links a:hover { color: var(--on-dark); }
+  .nav-cta { min-height: 44px; padding: 0 1.2rem; }
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    background: var(--deep);
-    position: relative; overflow: hidden;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: start;
-    padding-top: 70px;
-  }
-
-  /* Decorative silk-weave pattern */
-  #hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      repeating-linear-gradient(45deg, rgba(201,168,76,0.04) 0, rgba(201,168,76,0.04) 1px, transparent 0, transparent 50%),
-      repeating-linear-gradient(-45deg, rgba(201,168,76,0.04) 0, rgba(201,168,76,0.04) 1px, transparent 0, transparent 50%);
-    background-size: 30px 30px;
-    pointer-events: none;
-  }
-
-  .hero-left {
-    padding: 1rem 3rem 6rem 6rem;
-    position: relative; z-index: 2;
-  }
-
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.75rem;
-    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.8rem;
-  }
-  .hero-eyebrow::before {
-    content: ''; width: 2rem; height: 1px; background: var(--gold);
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5.5vw, 5.5rem);
-    font-weight: 300; line-height: 1.1;
-    color: var(--cream);
-    margin-bottom: 0.3rem;
-  }
-  .hero-title em {
-    font-style: italic; color: var(--gold-light);
-    display: block;
-  }
-
-  .hero-divider {
-    width: 3rem; height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-    margin: 1.8rem 0;
-  }
-
-  .hero-desc {
-    font-size: 1rem; line-height: 1.8; font-weight: 300;
-    color: rgba(245,233,200,0.65);
-    max-width: 420px; margin-bottom: 2.5rem;
-  }
-
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--deep);
-    padding: 0.9rem 2.2rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
-    font-weight: 500; border: none; cursor: pointer;
-    text-decoration: none; display: inline-block;
-    transition: all 0.3s; clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
-  .btn-outline {
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    padding: 0.9rem 2.2rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
-    text-decoration: none; display: inline-block;
-    transition: all 0.3s; background: transparent;
-  }
-  .btn-outline:hover { border-color: var(--gold-light); background: rgba(201,168,76,0.08); }
-  .btn-whatsapp {
-    background: #25d366; color: #fff;
-    padding: 0.9rem 2.2rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
-    font-weight: 500; text-decoration: none; display: inline-block;
-    transition: all 0.3s;
-  }
-  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.35); }
-
-  .hero-stats {
-    display: flex; gap: 2.5rem; margin-top: 3.5rem;
-    padding-top: 2rem; border-top: 1px solid rgba(201,168,76,0.15);
-  }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem; font-weight: 300; color: var(--gold-light);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: rgba(245,233,200,0.45); margin-top: 0.3rem;
-  }
-
-  .hero-right {
-    position: relative; height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  /* Decorative geometric frame */
-  .hero-img-frame {
-    position: relative; width: 380px; height: 520px;
-  }
-  .hero-img-frame::before {
-    content: '';
-    position: absolute; top: -18px; right: -18px;
-    width: 100%; height: 100%;
-    border: 1px solid rgba(201,168,76,0.35);
-    pointer-events: none;
-  }
-  .hero-img-frame::after {
-    content: '';
-    position: absolute; bottom: -18px; left: -18px;
-    width: 60%; height: 60%;
-    border: 1px solid rgba(201,168,76,0.2);
-    pointer-events: none;
-  }
-  .hero-img-frame img {
-    width: 100%; height: 100%; object-fit: cover;
-    display: block;
-  }
-  .hero-img-placeholder {
-    width: 100%; height: 100%;
-    background: linear-gradient(160deg, #4a1528 0%, #3a0d1e 50%, #280a15 100%);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 1rem;
-  }
-  .hero-img-placeholder .sari-icon {
-    font-size: 5rem; opacity: 0.4;
-  }
-  .hero-img-placeholder p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem; letter-spacing: 0.2em;
-    color: rgba(201,168,76,0.5); text-transform: uppercase;
-  }
-
-  .hero-badge {
-    position: absolute; bottom: -1.5rem; left: -2rem;
-    background: var(--wine);
-    border: 1px solid rgba(201,168,76,0.3);
-    padding: 1.2rem 1.5rem;
-    z-index: 3;
-  }
-  .hero-badge p:first-child {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; color: var(--gold-light); line-height: 1;
-  }
-  .hero-badge p:last-child {
-    font-size: 0.65rem; letter-spacing: 0.12em;
-    color: rgba(245,233,200,0.55); text-transform: uppercase; margin-top: 0.25rem;
-  }
-
-  /* Scroll indicator */
-  .scroll-hint {
-    position: absolute; bottom: 2.5rem; left: 6rem;
-    display: flex; align-items: center; gap: 1rem;
-    color: rgba(245,233,200,0.35); font-size: 0.7rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-  }
-  .scroll-line {
-    width: 3rem; height: 1px; background: rgba(201,168,76,0.3);
-    position: relative; overflow: hidden;
-  }
-  .scroll-line::after {
-    content: '';
-    position: absolute; top: 0; left: -100%;
-    width: 100%; height: 100%; background: var(--gold);
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-  @keyframes scrollPulse {
-    0% { left: -100%; } 100% { left: 100%; }
-  }
-
-  /* ── MARQUEE STRIP ── */
-  .marquee-strip {
-    background: var(--gold);
-    padding: 0.75rem 0; overflow: hidden; white-space: nowrap;
-  }
-  .marquee-inner {
-    display: inline-flex; gap: 0;
-    animation: marquee 20s linear infinite;
-  }
-  .marquee-item {
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--deep); font-weight: 500;
-    padding: 0 2.5rem;
-    border-right: 1px solid rgba(26,15,10,0.2);
-  }
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ── SECTION SHARED ── */
-  section { padding: 7rem 6rem; }
-  .section-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.75rem;
-    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-  }
-  .section-eyebrow::before { content: ''; width: 1.5rem; height: 1px; background: var(--gold); }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 300;
-    line-height: 1.15; color: var(--text);
-  }
-  .section-title em { font-style: italic; color: var(--gold-light); }
-
-  /* ── WHY CHOOSE ── */
-  #why { background: var(--deep); }
-  #why .section-title { color: var(--cream); }
-  #why .section-title em { color: var(--gold-light); }
-
-  .why-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 2px; margin-top: 4rem;
-  }
-  .why-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(201,168,76,0.12);
-    padding: 2.5rem 2rem;
-    transition: all 0.4s;
-    position: relative; overflow: hidden;
-  }
-  .why-card::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.4s;
-  }
-  .why-card:hover { background: rgba(201,168,76,0.06); }
-  .why-card:hover::after { transform: scaleX(1); }
-  .why-icon {
-    font-size: 2.2rem; margin-bottom: 1.2rem; display: block;
-    font-style: normal; line-height: 1;
-    filter: none; -webkit-text-fill-color: initial;
-  }
-  .why-head {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem; font-weight: 400; color: var(--gold-light);
-    margin-bottom: 0.75rem; line-height: 1.3;
-  }
-  .why-text {
-    font-size: 0.85rem; line-height: 1.8; font-weight: 300;
-    color: rgba(245,233,200,0.55);
-  }
-
-  /* ── UNIFIED CARDS (Collection + Services) ── */
-  #sales { background: var(--cream); }
-  #services { background: var(--cream); position: relative; overflow: hidden; }
-  #services::before {
-    content: 'SAREES';
-    position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14rem; font-weight: 300; line-height: 1;
-    color: rgba(74,21,40,0.04); pointer-events: none; white-space: nowrap;
-  }
-
-  .collection-grid, .services-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 2rem; margin-top: 4rem;
-    align-items: start;
-  }
-
-  /* Single unified card style */
-  .uni-card {
-    background: white;
-    border: 1px solid rgba(201,168,76,0.15);
-    display: flex; flex-direction: column;
-    overflow: hidden;
-    transition: box-shadow 0.3s;
-    position: relative;
-  }
-  .uni-card:hover { box-shadow: 0 20px 60px rgba(74,21,40,0.1); transform: translateY(-4px); transition: box-shadow 0.3s, transform 0.3s; }
-
-  .uni-card-img {
-    height: 280px;
-    background: linear-gradient(160deg, #4a1528, #2d0d1f);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 4rem; color: rgba(201,168,76,0.2);
-    overflow: hidden; flex-shrink: 0; position: relative;
-  }
-  .uni-card-soon {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 1.1rem; color: var(--gold-pale); letter-spacing: 0.05em;
-  }
-  .uni-card-img img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
-  .uni-card-tag {
-    position: absolute; top: 1rem; left: 1rem;
-    background: var(--wine); color: var(--gold-pale);
-    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 0.35rem 0.75rem; z-index: 2;
-  }
-  .uni-card-body {
-    padding: 1.5rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-  }
-  .uni-card-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; font-weight: 400; color: var(--text);
-    margin-bottom: 0.2rem;
-  }
-  .uni-card-meta {
-    font-size: 0.72rem; letter-spacing: 0.1em;
-    color: var(--muted); text-transform: uppercase;
-  }
-  .uni-card-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; color: var(--wine); font-style: italic;
-    white-space: nowrap; margin-left: 1rem;
-  }
-  .uni-card-desc {
-    padding: 1rem 2rem;
-    font-size: 0.85rem; line-height: 1.7; color: var(--muted); font-weight: 300;
-  }
-  .uni-card-footer {
-    padding: 1rem 2rem 1.5rem;
-    display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap;
-    margin-top: auto;
-  }
-  .service-link {
-    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--wine); text-decoration: none; font-weight: 500;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    border-bottom: 1px solid rgba(74,21,40,0.2);
-    padding-bottom: 0.15rem; transition: gap 0.3s;
-  }
-  .service-link:hover { gap: 0.9rem; }
-
-  /* keep old names as aliases so detail panel CSS still works */
-  .collection-card { }
-  .collection-detail-inner {
-    border-top: 1px solid rgba(201,168,76,0.15);
-    padding: 1.8rem 2rem 2rem; background: white;
-  }
-
-  /* ── GALLERY ── */
-  #gallery { background: var(--deep); padding-bottom: 5rem; }
-  #gallery .section-title { color: var(--cream); }
-  #gallery .section-title em { color: var(--gold-light); }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px; margin-top: 3rem;
-  }
-  .gallery-cell {
-    background: linear-gradient(160deg, #4a1528, #280a15);
-    overflow: hidden; position: relative;
-    transition: opacity 0.3s;
-  }
-  .gallery-cell img { width:100%; height:100%; object-fit:cover; object-position: center top; display:block; }
-  .gallery-cell:hover { opacity: 0.88; }
-  /* All same width, rectangles taller */
-  .gallery-cell:nth-child(1),
-  .gallery-cell:nth-child(3) { height: 580px; }
-  .gallery-cell:nth-child(2),
-  .gallery-cell:nth-child(4) { height: 420px; }
-
-  .gallery-label {
-    position: absolute; bottom: 1rem; left: 1rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem; font-style: italic;
-    color: rgba(245,233,200,0.5);
-  }
-
-  /* ── CONTACT ── */
-  #contact { background: var(--cream); }
-  .contact-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 5rem; margin-top: 4rem; align-items: start;
-  }
-  .contact-info { }
-  .contact-item {
-    display: flex; gap: 1.5rem; align-items: flex-start;
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(201,168,76,0.12);
-  }
-  .contact-item:last-child { border-bottom: none; margin-bottom: 0; }
-  .contact-icon {
-    width: 2.5rem; height: 2.5rem;
-    border: 1px solid rgba(201,168,76,0.3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; flex-shrink: 0;
-    color: var(--gold);
-  }
-  .contact-label {
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.35rem;
-  }
-  .contact-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; color: var(--text); line-height: 1.5;
-  }
-  .contact-value a { color: inherit; text-decoration: none; }
-  .contact-value a:hover { color: var(--wine); }
-
-  .contact-form-area {
-    background: white; padding: 3rem;
-    border: 1px solid rgba(201,168,76,0.15);
-  }
-  .form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem; color: var(--text);
-    margin-bottom: 0.5rem;
-  }
-  .form-sub {
-    font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6;
-  }
-  .form-row { margin-bottom: 1.25rem; }
-  .form-row label {
-    display: block; font-size: 0.65rem; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
-  }
-  .form-row input, .form-row textarea, .form-row select {
-    width: 100%;
-    border: 1px solid rgba(201,168,76,0.2);
-    background: transparent;
-    padding: 0.8rem 1rem;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.9rem; color: var(--text);
-    outline: none; transition: border-color 0.3s;
-    -webkit-appearance: none;
-  }
-  .form-row input:focus, .form-row textarea:focus, .form-row select:focus {
-    border-color: var(--gold);
-  }
-  .form-row textarea { min-height: 110px; resize: vertical; }
-
-  .btn-submit {
-    width: 100%;
-    background: linear-gradient(135deg, #4a1528, #3a0d1e);
-    color: var(--gold-pale);
-    padding: 1rem; border: none; cursor: pointer;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
-    transition: all 0.3s; margin-top: 0.5rem;
-  }
-  .btn-submit:hover { background: linear-gradient(135deg, #4a1528, #3a0d1e); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--deep);
-    padding: 3rem 6rem;
-    display: flex; align-items: center; justify-content: space-between;
-    border-top: 1px solid rgba(201,168,76,0.1);
-  }
-  .footer-brand {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2rem; color: var(--gold-light); font-weight: 400;
-    line-height: 1;
-  }
-  .footer-links { display: flex; gap: 2rem; }
-  .footer-links a {
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: rgba(245,233,200,0.4); text-decoration: none;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--gold-light); }
-  .footer-copy {
-    font-size: 0.7rem; color: rgba(245,233,200,0.3);
-    letter-spacing: 0.05em;
-  }
-
-  /* ── FLOATING CALL BTN ── */
-  .float-call {
-    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
-    background: var(--gold);
-    color: var(--deep);
-    width: 3.5rem; height: 3.5rem;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
-    text-decoration: none;
-    transition: all 0.3s;
-    clip-path: polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-  }
-  .float-call:hover { transform: scale(1.1); background: var(--gold-light); }
-
-  /* ── DETAIL PANELS ── */
-  .detail-panel {
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
-    opacity: 0;
-  }
-  .detail-panel.open {
-    max-height: 700px; opacity: 1;
-  }
-  .detail-inner {
-    border-top: 1px solid rgba(201,168,76,0.15);
-    padding: 1.8rem 2rem 2rem;
-    background: #fdf6ee;
-  }
-  .detail-section-title {
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.6rem; margin-top: 1.2rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .detail-section-title::before { content:''; width:1rem; height:1px; background:var(--gold); }
-  .detail-section-title:first-child { margin-top: 0; }
-  .detail-text {
-    font-size: 0.87rem; line-height: 1.85; color: var(--muted); font-weight: 300;
-  }
-  .detail-locations {
-    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem;
-  }
-  .detail-loc-tag {
-    font-size: 0.7rem; letter-spacing: 0.08em;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.25);
-    color: var(--text); padding: 0.3rem 0.75rem;
-  }
-  .detail-contact-row {
-    display: flex; gap: 0.6rem; align-items: center;
-    font-size: 0.85rem; color: var(--text); margin-bottom: 0.4rem;
-  }
-  .detail-contact-row a { color: var(--wine); text-decoration: none; }
-  .detail-contact-row a:hover { text-decoration: underline; }
-  .detail-contact-icon { color: var(--gold); font-size: 0.9rem; }
-  .more-info-btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--wine); background: none; border: none; cursor: pointer;
-    font-family: 'Jost', sans-serif; font-weight: 500;
-    border-bottom: 1px solid rgba(74,21,40,0.2);
-    padding-bottom: 0.15rem; transition: gap 0.3s;
-  }
-  .more-info-btn:hover { gap: 0.9rem; }
-  .more-info-btn .arrow { transition: transform 0.3s; display:inline-block; }
-  .more-info-btn.open .arrow { transform: rotate(90deg); }
-
-  /* collection card detail */
-  .collection-detail-inner {
-    border-top: 1px solid rgba(201,168,76,0.15);
-    padding: 1.8rem 2rem 2rem;
-    background: white;
-  }
-
-  /* ── ANIMATIONS ── */
-  . {
-    opacity: 1; transform: translateY(0);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  ..animate-ready {
-    opacity: 0; transform: translateY(30px);
-  }
-  ..animate-ready.visible { opacity: 1; transform: translateY(0); }
-  . { transition-delay: 0.15s; }
-  . { transition-delay: 0.3s; }
-  . { transition-delay: 0.45s; }
-
-  /* ── SCROLL REVEAL ── */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.75s ease, transform 0.75s ease;
-  }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-up-d1 { transition-delay: 0.15s; }
-  .fade-up-d2 { transition-delay: 0.3s; }
-  .fade-up-d3 { transition-delay: 0.45s; }
-
-  /* ── HAMBURGER BUTTON ── */
   .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 201;
+    display: none; flex-direction: column; gap: 5px; background: none; border: none;
+    cursor: pointer; padding: 10px; margin-right: -10px; z-index: 201;
   }
-  .hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--gold-light);
-    border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--on-dark); transition: transform 0.3s, opacity 0.3s; }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── MOBILE SLIDE MENU ── */
   .mobile-menu {
-    position: fixed;
-    top: 0; right: 0;
-    width: 270px;
-    height: 100vh;
-    background: var(--deep);
-    border-left: 1px solid rgba(201,168,76,0.2);
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-    z-index: 300;
-    display: flex;
-    flex-direction: column;
-    padding: 5rem 2rem 2rem;
-    gap: 0;
+    position: fixed; top: 0; right: 0; width: min(320px, 86vw); height: 100dvh;
+    background: var(--plum); transform: translateX(100%);
+    transition: transform 0.35s var(--ease), visibility 0.35s; z-index: 300; visibility: hidden;
+    display: flex; flex-direction: column; padding: 5.5rem 2rem 2rem;
   }
-  .mobile-menu.open { transform: translateX(0); }
-  .mobile-menu .mob-brand {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.6rem;
-    color: var(--gold-light);
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(201,168,76,0.15);
+  @media (min-width: 901px) { .mobile-menu, .menu-overlay { display: none; } }
+  .mobile-menu.open { transform: translateX(0); visibility: visible; }
+  .mobile-menu .mob-brand { font-family: var(--serif); font-size: 1.75rem; font-weight: 600; color: var(--on-dark); margin-bottom: 1.5rem; }
+  .mobile-menu a.mob-link {
+    font-family: var(--serif); font-size: 1.625rem; color: var(--on-dark);
+    text-decoration: none; padding: 0.45rem 0; transition: color 0.2s, transform 0.2s;
   }
-  .mobile-menu a {
-    display: block;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(245,233,200,0.7);
-    text-decoration: none;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(201,168,76,0.08);
-    transition: color 0.2s, padding-left 0.2s;
-  }
-  .mobile-menu a:hover { color: var(--gold-light); padding-left: 0.5rem; }
-  .mobile-menu .mob-call {
-    margin-top: 2rem;
-    background: var(--gold);
-    color: var(--deep) !important;
-    text-align: center;
-    padding: 0.9rem !important;
-    font-weight: 500;
-    border-bottom: none !important;
-    letter-spacing: 0.15em;
-  }
-  .mobile-menu .mob-call:hover { background: var(--gold-light); padding-left: 0 !important; }
+  .mobile-menu a.mob-link:hover { color: var(--gold); transform: translateX(4px); }
+  .mobile-menu .mob-call { margin-top: auto; }
+  .menu-overlay { position: fixed; inset: 0; background: rgba(20,4,10,0.55); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.35s, visibility 0.35s; z-index: 299; }
+  .menu-overlay.visible { opacity: 1; visibility: visible; pointer-events: auto; }
 
-  /* Overlay */
-  .menu-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.55);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    z-index: 299;
+  /* ── HERO: statement + specimen mosaic ── */
+  #hero {
+    background: var(--wine); color: var(--on-dark);
+    min-height: 100svh; padding: calc(var(--nav-h) + clamp(32px, 5vw, 72px)) 0 clamp(56px, 6vw, 88px) var(--m);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 64px);
+    align-items: stretch; overflow: hidden;
   }
-  .menu-overlay.visible { opacity: 1; pointer-events: auto; }
+  .hero-copy { display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; }
+  .hero-title { font-size: var(--t-display); color: var(--on-dark); }
+  .hero-desc { font-size: var(--t-lead); font-family: var(--serif); line-height: 1.3; color: var(--on-dark); max-width: 34ch; margin-top: 2rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.5rem; }
+  .price-list { list-style: none; display: grid; grid-template-columns: repeat(5, auto); justify-content: start; gap: 0.5rem 2.25rem; }
+  .price-list li { display: flex; flex-direction: column; }
+  .price-list b { font-family: var(--serif); font-weight: 500; font-size: var(--t-head); line-height: 1; color: var(--gold); }
+  .price-list span { font-size: var(--t-small); color: var(--on-dark-soft); margin-top: 0.4rem; }
 
-  /* ── DIWALI OFFER BANNER ── */
-  .festive-banner {
-    position: relative; overflow: hidden;
-    background: radial-gradient(circle at 15% 50%, rgba(232,201,122,0.18), transparent 40%),
-                radial-gradient(circle at 85% 50%, rgba(232,201,122,0.18), transparent 40%),
-                var(--deep);
-    border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
-    padding: 2.5rem 6rem; color: var(--cream);
-    display: flex; align-items: center; justify-content: center; gap: 2.5rem; text-align: center;
+  .hero-mosaic {
+    display: grid; gap: 10px; margin-right: -8vw;
+    grid-template-columns: 1.15fr 1fr 0.8fr; grid-template-rows: 1fr 1fr;
+    min-height: 560px;
   }
-  .festive-lamp { font-size: 2.6rem; filter: drop-shadow(0 0 12px rgba(255,190,80,0.8)); animation: lampGlow 2.4s ease-in-out infinite; }
-  @keyframes lampGlow { 50% { filter: drop-shadow(0 0 22px rgba(255,190,80,1)); } }
-  .festive-eyebrow { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold-light); line-height: 1; }
-  .festive-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; margin: 0.4rem 0; }
-  .festive-title strong { color: var(--gold-light); font-weight: 600; }
-  .festive-desc { font-size: 0.9rem; color: rgba(253,246,238,0.8); letter-spacing: 0.03em; }
-  .festive-actions { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.2rem; }
-  .festive-btn {
-    display: inline-block; padding: 0.75rem 1.6rem; font-size: 0.75rem; letter-spacing: 0.15em;
-    text-transform: uppercase; text-decoration: none; border: 1px solid var(--gold-light);
-    color: var(--deep); background: var(--gold-light); transition: transform 0.2s;
+  .hero-mosaic figure { position: relative; overflow: hidden; background: var(--plum); }
+  .hero-mosaic img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-mosaic .m-a { grid-row: 1 / 3; }
+  .hero-mosaic .m-a img { object-position: center 20%; }
+  .hero-mosaic .m-d { grid-row: 1 / 3; grid-column: 3; }
+  .fade-stack img { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
+  .fade-stack img.on { opacity: 1; }
+  .fade-stack img:first-child { position: relative; }
+
+  /* ── DIWALI BAND ── */
+  .festive-band {
+    background: var(--gold); color: var(--plum);
+    padding: clamp(28px, 3vw, 40px) var(--m);
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem 3rem; align-items: center;
   }
-  .festive-btn.ghost { background: transparent; color: var(--gold-light); }
-  .festive-btn:hover { transform: translateY(-2px); }
-  .festive-fine { font-size: 0.7rem; color: rgba(253,246,238,0.55); margin-top: 0.9rem; }
+  .festive-band h2 { font-size: clamp(1.75rem, 2.6vw, 2.5rem); }
+  .festive-band p { margin-top: 0.4rem; max-width: 60ch; }
+  .festive-band .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .festive-band .btn-quiet { background: rgba(46,12,25,0.1); color: var(--plum); }
+  .festive-band .btn-quiet:hover { background: rgba(46,12,25,0.18); }
+
+  /* ── SERVICES: mosaic of unlike tiles ── */
+  #services { background: var(--bg); }
+  .svc-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 4rem; align-items: end; margin-bottom: clamp(40px, 5vw, 72px); }
+  .svc-head p { max-width: 52ch; }
+  .svc-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .svc { background: var(--surface); display: flex; flex-direction: column; }
+  .svc:nth-child(2) { background: var(--sand); }
+  .svc:nth-child(3) { background: var(--gold-pale); }
+  .svc:nth-child(4) { background: var(--sand); }
+  .svc-img { aspect-ratio: 4 / 3; overflow: hidden; }
+  .svc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .svc:hover .svc-img img { transform: scale(1.04); }
+  .svc-body { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+  .svc-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+  .svc h3 { font-size: var(--t-lead); }
+  .svc .price { font-family: var(--serif); font-size: var(--t-lead); color: var(--wine); white-space: nowrap; font-weight: 600; }
+  .svc .when { color: var(--muted); font-size: var(--t-small); }
+  .svc .more { margin-top: auto; padding-top: 0.5rem; }
+
+  /* live thing: plan your booking */
+  .planner {
+    margin-top: 10px; background: var(--wine); color: var(--on-dark);
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem 4rem;
+    padding: clamp(28px, 4vw, 56px);
+  }
+  .planner h3 { font-size: clamp(2rem, 3vw, 3rem); }
+  .planner > div > p { margin-top: 1rem; color: var(--on-dark-soft); max-width: 40ch; }
+  .planner fieldset { border: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .planner legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .pick { position: relative; }
+  .pick input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+  .pick span {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    min-height: 60px; padding: 0.75rem 1.1rem; background: rgba(246,239,228,0.08);
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .pick span b { font-family: var(--serif); font-size: 1.375rem; font-weight: 600; }
+  .pick input:checked + span { background: var(--gold); color: var(--plum); }
+  .pick input:focus-visible + span { outline: 3px solid var(--on-dark); outline-offset: 2px; }
+  .pick:hover span { transform: translateY(-2px); }
+  .planner-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; margin-top: 1.5rem; }
+  .count { display: flex; align-items: center; gap: 0.75rem; }
+  .count button {
+    width: 44px; height: 44px; border: 0; background: rgba(246,239,228,0.12); color: var(--on-dark);
+    font-size: 1.375rem; cursor: pointer; transition: background-color 0.2s, transform 0.15s;
+  }
+  .count button:hover { background: rgba(246,239,228,0.22); }
+  .count button:active { transform: scale(0.94); }
+  .count output { font-family: var(--serif); font-size: 1.625rem; min-width: 2ch; text-align: center; }
+  .planner-total { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.75rem; }
+  .total { font-family: var(--serif); font-size: var(--t-head); line-height: 1; color: var(--gold); }
+  .total-note { color: var(--on-dark-soft); }
+
+  /* ── WHY ── */
+  #why { background: var(--plum); color: var(--on-dark); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 3rem 5rem; align-items: start; }
+  #why .why-intro p { margin-top: 1.5rem; color: var(--on-dark-soft); max-width: 40ch; }
+  #why .why-photo { margin-top: 2.5rem; aspect-ratio: 4 / 5; max-width: 420px; overflow: hidden; }
+  #why .why-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .why-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5rem 3rem; padding-top: 0.5rem; }
+  .why-list h3 { font-size: var(--t-lead); color: var(--gold); margin-bottom: 0.75rem; line-height: 1.15; }
+  .why-list p { color: var(--on-dark); }
+  .why-list blockquote { grid-column: 1 / -1; background: rgba(246,239,228,0.07); padding: 2rem; font-family: var(--serif); font-size: var(--t-lead); line-height: 1.35; }
+  .why-list blockquote cite { display: block; margin-top: 1rem; font-family: var(--sans); font-size: var(--t-small); font-style: normal; color: var(--on-dark-soft); }
+
+  /* ── COLLECTION: specimen catalogue ── */
+  #sales { background: var(--bg); }
+  .cat-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 4rem; align-items: end; margin-bottom: clamp(40px, 5vw, 72px); }
+  .cat-head p { max-width: 52ch; }
+  .catalogue { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3rem 12px; align-items: start; }
+  .spec-tile { aspect-ratio: 4 / 5; padding: 9%; background: var(--surface); overflow: hidden; }
+  .spec:nth-child(4n+1) .spec-tile { background: var(--wine); }
+  .spec:nth-child(4n+2) .spec-tile { background: var(--sand); }
+  .spec:nth-child(4n+3) .spec-tile { background: var(--gold-pale); }
+  .spec:nth-child(4n+4) .spec-tile { background: var(--surface); }
+  .spec-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .spec:hover .spec-tile img { transform: scale(1.035); }
+  .spec.big { grid-column: span 2; grid-row: span 2; }
+  .spec.big .spec-tile { aspect-ratio: auto; height: clamp(420px, 52vw, 820px); padding: 7%; }
+  .spec-info { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: 1rem; }
+  .spec h3 { font-size: var(--t-lead); line-height: 1.15; }
+  .spec .price { font-family: var(--serif); font-size: var(--t-lead); color: var(--wine); font-weight: 600; white-space: nowrap; }
+  .spec .fact { color: var(--muted); font-size: var(--t-small); margin-top: 0.25rem; }
+
+  .more-info-btn {
+    margin-top: 0.75rem; display: inline-flex; align-items: center; gap: 0.5rem;
+    background: none; border: 0; padding: 0.25rem 0; cursor: pointer;
+    font-family: var(--sans); font-size: var(--t-small); font-weight: 500; color: var(--wine);
+    text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 2px; text-underline-offset: 5px;
+  }
+  .more-info-btn .arrow { display: inline-block; transition: transform 0.3s; text-decoration: none; }
+  .more-info-btn.open .arrow { transform: rotate(90deg); }
+  .detail-panel { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.55s var(--ease), opacity 0.4s; }
+  .detail-panel.open { max-height: 900px; opacity: 1; }
+  .detail-panel p { padding-top: 0.75rem; color: var(--ink); }
+
+  .spec-more { grid-column: span 2; background: var(--wine); color: var(--on-dark); padding: clamp(28px, 3vw, 48px); display: flex; flex-direction: column; justify-content: space-between; gap: 2rem; align-self: stretch; }
+  .spec-more h3 { font-size: clamp(1.75rem, 2.4vw, 2.5rem); }
+  .spec-more p { color: var(--on-dark-soft); margin-top: 0.75rem; max-width: 36ch; }
+  .spec-more .btn { align-self: flex-start; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--wine); color: var(--on-dark); padding-left: 0; padding-right: 0; overflow: hidden; }
+  .gal-head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; padding: 0 var(--m); margin-bottom: clamp(32px, 4vw, 56px); }
+  .gal-head p { color: var(--on-dark-soft); max-width: 44ch; margin-top: 1rem; }
+  .arrows { display: flex; gap: 8px; }
+  .t-arrow {
+    width: 52px; height: 52px; border: 0; cursor: pointer; font-size: 1.25rem;
+    background: rgba(246,239,228,0.12); color: var(--on-dark); font-family: var(--sans);
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  .t-arrow:hover { background: var(--gold); color: var(--plum); }
+  .t-arrow:active { transform: scale(0.95); }
+  .t-arrow:disabled { opacity: 0.35; cursor: default; }
+  .g-outer { overflow: hidden; cursor: grab; user-select: none; }
+  .g-outer.dragging { cursor: grabbing; }
+  .g-track { display: flex; gap: 16px; padding: 0 var(--m); transition: transform 0.6s var(--ease); will-change: transform; }
+  .g-cell { flex: 0 0 380px; width: 380px; height: 500px; overflow: hidden; background: var(--plum); }
+  .g-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .g-cell:hover img { transform: scale(1.04); }
+  .g-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+  .g-dot { width: 10px; height: 10px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: rgba(246,239,228,0.3); transition: background-color 0.3s, width 0.3s; }
+  .g-dot.active { background: var(--gold); width: 28px; border-radius: 5px; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--surface); padding-left: 0; padding-right: 0; overflow: hidden; }
+  #testimonials .gal-head p { color: var(--muted); }
+  #testimonials .t-arrow { background: var(--bg); color: var(--wine); }
+  #testimonials .t-arrow:hover { background: var(--wine); color: var(--on-dark); }
+  .rating { display: flex; align-items: baseline; gap: 1rem; margin-top: 1rem; }
+  .rating b { font-family: var(--serif); font-size: var(--t-head); line-height: 1; color: var(--wine); }
+  .t-outer { overflow: hidden; cursor: grab; user-select: none; padding: 0.5rem 0 1rem; margin: 0 var(--m); }
+  .t-outer.dragging { cursor: grabbing; }
+  .t-track { display: flex; gap: 24px; padding: 0; transition: transform 0.6s var(--ease); will-change: transform; align-items: stretch; }
+  .t-card {
+    flex: 0 0 380px; background: var(--bg); padding: 2rem 2rem 1.75rem;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+    transition: transform 0.3s var(--ease), background-color 0.3s;
+  }
+  .t-card:nth-child(3n+2) { background: var(--gold-pale); }
+  .t-card:hover { transform: translateY(-4px); }
+  .t-quote { font-family: var(--serif); font-size: 1.375rem; line-height: 1.35; color: var(--ink); }
+  .t-author { display: flex; align-items: center; gap: 0.85rem; }
+  .t-avatar {
+    width: 44px; height: 44px; border-radius: 50%; background: var(--wine); color: var(--on-dark);
+    display: flex; align-items: center; justify-content: center; font-size: var(--t-small); font-weight: 500; flex: none;
+  }
+  .t-name { font-weight: 500; }
+  .t-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 2rem; padding: 0 var(--m); }
+  .t-dot { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: var(--sand); transition: background-color 0.3s, width 0.3s; }
+  .t-dot.active { background: var(--wine); width: 24px; border-radius: 4px; }
+  .review-cta { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; padding: 0 var(--m); margin-top: 2.5rem; }
+
+  /* ── CONTACT: coupon ── */
+  #contact { background: var(--bg); }
+  /* taste-skill-ignore: the radial masks cut the coupon's two notches; no colour gradient is drawn */
+  .coupon {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    background: var(--wine); color: var(--on-dark);
+    position: relative;
+    -webkit-mask: radial-gradient(circle 16px at 45.45% 0, transparent 98%, #000) top / 100% 51% no-repeat, /* taste-skill-ignore */
+                  radial-gradient(circle 16px at 45.45% 100%, transparent 98%, #000) bottom / 100% 51% no-repeat; /* taste-skill-ignore */
+            mask: radial-gradient(circle 16px at 45.45% 0, transparent 98%, #000) top / 100% 51% no-repeat, /* taste-skill-ignore */
+                  radial-gradient(circle 16px at 45.45% 100%, transparent 98%, #000) bottom / 100% 51% no-repeat; /* taste-skill-ignore */
+  }
+  .coupon-left { padding: clamp(32px, 4vw, 64px); display: flex; flex-direction: column; gap: 2.5rem; border-right: 5px dotted var(--bg); }
+  .coupon-left h2 { color: var(--on-dark); }
+  .coupon-left h2 + p { color: var(--on-dark-soft); margin-top: 1rem; max-width: 38ch; }
+  .contact-list { list-style: none; display: grid; gap: 1.25rem; }
+  .contact-list .k { display: block; font-size: var(--t-small); color: var(--on-dark-soft); }
+  .contact-list .v { font-family: var(--serif); font-size: var(--t-lead); line-height: 1.25; text-decoration: none; }
+  .contact-list a.v:hover { color: var(--gold); }
+  .areas { color: var(--on-dark-soft); font-size: var(--t-small); max-width: 46ch; }
+  .coupon-form { padding: clamp(32px, 4vw, 64px); display: grid; gap: 10px; align-content: start; }
+  .coupon-form h3 { font-size: var(--t-lead); margin-bottom: 0.75rem; }
+  .field label { display: block; font-size: var(--t-small); color: var(--on-dark-soft); margin-bottom: 0.35rem; }
+  .field input, .field select, .field textarea {
+    width: 100%; min-height: 52px; padding: 0.8rem 1rem; border: 0;
+    background: rgba(246,239,228,0.1); color: var(--on-dark);
+    font-family: var(--sans); font-size: 1rem; -webkit-appearance: none; appearance: none;
+    transition: background-color 0.2s;
+  }
+  .field select option { color: var(--ink); }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(246,239,228,0.55); }
+  .field input:focus, .field select:focus, .field textarea:focus { background: rgba(246,239,228,0.18); outline: 2px solid var(--gold); outline-offset: 0; }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .field-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn-submit { width: 100%; min-height: 56px; margin-top: 0.5rem; }
+  .map { margin-top: 10px; background: var(--surface); }
+  .map iframe { display: block; width: 100%; height: 320px; border: 0; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--plum); color: var(--on-dark); padding: clamp(56px, 7vw, 104px) var(--m) 2rem; }
+  .footer-name { font-family: var(--serif); font-weight: 500; font-size: clamp(3rem, 11.5vw, 11rem); line-height: 0.9; letter-spacing: -0.035em; }
+  .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; margin-top: 2.5rem; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; }
+  .footer-links a { text-decoration: none; color: var(--on-dark-soft); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: var(--t-small); color: var(--on-dark-soft); }
+
+  /* ── FLOATING BUTTONS (they float, so they keep a shadow) ── */
+  .float-call {
+    position: fixed; right: 20px; z-index: 200; width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center; text-decoration: none;
+    box-shadow: 0 6px 20px rgba(20,4,10,0.28); /* taste-skill-ignore: fixed floating buttons */ transition: transform 0.2s var(--ease);
+  }
+  .float-call:hover { transform: scale(1.08); }
+  .float-call svg { width: 24px; height: 24px; }
+  .float-phone { bottom: 88px; background: var(--gold); color: var(--plum); }
+  .float-wa { bottom: 20px; background: #25d366; color: #06301a; }
+
+  /* ── ENTRANCES ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .fade-up-d1 { transition-delay: 0.08s; }
+  .fade-up-d2 { transition-delay: 0.16s; }
+  .fade-up-d3 { transition-delay: 0.24s; }
+  .no-js .fade-up { opacity: 1; transform: none; }
+  .hero-in { animation: heroIn 0.9s var(--ease) both; }
+  .hero-in.d1 { animation-delay: 0.1s; } .hero-in.d2 { animation-delay: 0.2s; } .hero-in.d3 { animation-delay: 0.3s; }
+  .hero-mosaic figure { animation: tileIn 1s var(--ease) both; }
+  .hero-mosaic figure:nth-child(2) { animation-delay: 0.12s; }
+  .hero-mosaic figure:nth-child(3) { animation-delay: 0.24s; }
+  .hero-mosaic figure:nth-child(4) { animation-delay: 0.36s; }
+  @keyframes heroIn { from { opacity: 0; transform: translateY(24px); } }
+  @keyframes tileIn { from { opacity: 0; transform: translateY(40px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
+    .fade-up { opacity: 1; transform: none; }
+  }
 
   /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    .nav-links { gap: 1.25rem; }
+    .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .catalogue { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .price-list { grid-template-columns: repeat(3, auto); }
+  }
   @media (max-width: 900px) {
-    .festive-banner { padding: 2rem 1.5rem; gap: 1rem; }
-    .festive-lamp { display: none; }
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .nav-cta { display: none; }
+    :root { --nav-h: 64px; }
+    .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
-    #hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 0.5rem 2rem 3rem; }
-    .hero-right { display: block; height: auto; padding: 2rem 2rem 3rem; }
-    .hero-img-frame { width: 100%; max-width: 380px; height: 420px; margin: 0 auto; }
-    section { padding: 5rem 2rem; }
-    .why-grid, .collection-grid, .services-grid, .contact-grid {
-      grid-template-columns: 1fr;
-    }
-    .uni-card-img { height: 220px; }
-    .collection-grid, .services-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-cell:nth-child(1), .gallery-cell:nth-child(3) { height: 420px; }
-    .gallery-cell:nth-child(2), .gallery-cell:nth-child(4) { height: 300px; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 1.5rem; }
-    .hero-stats { gap: 1.5rem; }
-    .scroll-hint { left: 2rem; bottom: 1.5rem; }
-    #services::before { display: none; }
-    #testimonials { padding: 5rem 0 !important; }
-    #testimonials > div:first-child { padding: 0 1.5rem !important; }
-    .t-dots { display: none !important; }
-    #gallery > div:first-child { padding: 0 1.5rem !important; }
-    #gallery { padding: 3.5rem 0 !important; }
-    .hero-stats { flex-wrap: wrap; }
-    .contact-grid { gap: 3rem; }
-    .hero-actions a { width: 100%; max-width: 360px; text-align: center; }
-    .areas-section { padding: 0 1.5rem 3rem !important; }
-    .areas-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
-    .detail-contact-row a { overflow-wrap: anywhere; }
+    #hero { grid-template-columns: 1fr; padding-right: var(--m); min-height: auto; }
+    .hero-copy { gap: 88px; }
+    .hero-mosaic { margin-right: calc(var(--m) * -1); min-height: 0; height: 120vw; max-height: 640px; grid-template-columns: 1.2fr 1fr 0.55fr; }
+    .hero-mosaic .m-d { grid-row: 1 / 3; }
+    .festive-band { grid-template-columns: 1fr; }
+    .svc-head, .cat-head { grid-template-columns: 1fr; }
+    .planner { grid-template-columns: 1fr; }
+    #why { grid-template-columns: 1fr; }
+    #why .why-photo { max-width: none; aspect-ratio: 4 / 3; }
+    .coupon { grid-template-columns: 1fr; -webkit-mask: none; mask: none; }
+    .coupon-left { border-right: 0; border-bottom: 5px dotted var(--bg); }
+  }
+  @media (max-width: 640px) {
+    .price-list { grid-template-columns: repeat(2, auto); gap: 1.25rem 2rem; }
+    .hero-actions .btn { flex: 1 1 100%; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .planner fieldset { grid-template-columns: 1fr; }
+    .why-list { grid-template-columns: 1fr; gap: 2.25rem; }
+    .catalogue { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.25rem 8px; }
+    .spec.big { grid-column: 1 / -1; grid-row: auto; }
+    .spec.big .spec-tile { height: auto; aspect-ratio: 4 / 5; }
+    .spec-info { flex-direction: column; gap: 0.15rem; }
+    .spec h3, .spec .price { font-size: 1.25rem; }
+    .g-cell { flex-basis: calc(100vw - 2 * var(--m)); width: calc(100vw - 2 * var(--m)); height: 116vw; }
+    .t-card { flex-basis: calc(100vw - 2 * var(--m)); }
+    .spec-more { grid-column: 1 / -1; }
+    .t-dots { display: none; }
+    .field-pair { grid-template-columns: 1fr; }
+    .float-call { width: 52px; height: 52px; right: 16px; }
+    .float-phone { bottom: 80px; }
+    .float-wa { bottom: 16px; }
   }
 </style>
+
 <script>
   function togglePanel(id, btn) {
     var panel = document.getElementById(id);
     var isOpen = panel.classList.contains('open');
     panel.classList.toggle('open', !isOpen);
     btn.classList.toggle('open', !isOpen);
-    btn.querySelector('.arrow').textContent = isOpen ? '→' : '↓';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    
   }
 </script>
 <!-- Google Analytics -->
@@ -862,645 +523,511 @@
 </head>
 <body>
 
-
-<!-- MOBILE OVERLAY -->
 <div class="menu-overlay" id="menuOverlay"></div>
-
-<!-- MOBILE SLIDE MENU -->
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" aria-label="Menu">
   <div class="mob-brand">Sree Subha Sarees</div>
-  <a href="#why" class="mob-link">Why Us</a>
   <a href="#services" class="mob-link">Services</a>
+  <a href="#why" class="mob-link">Why us</a>
   <a href="#sales" class="mob-link">Collection</a>
   <a href="#gallery" class="mob-link">Gallery</a>
-  <a href="#testimonials" class="mob-link">Testimonials</a>
+  <a href="#testimonials" class="mob-link">Reviews</a>
   <a href="#contact" class="mob-link">Contact</a>
-  <a href="tel:13468296459" class="mob-call">📞 Call to Book</a>
+  <a href="tel:13468296459" class="btn btn-gold mob-call"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg> Call 346-829-6459</a>
 </div>
 
-<!-- NAV -->
-<nav>
+<nav aria-label="Main">
   <a href="#hero" class="nav-brand">Sree Subha Sarees</a>
   <ul class="nav-links">
-    <li><a href="#why">Why Us</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why us</a></li>
     <li><a href="#sales">Collection</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:1rem;">
-    <a href="tel:13468296459" class="nav-cta">Call to Book</a>
-    <button class="hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <a href="tel:13468296459" class="btn btn-gold nav-cta">Call to book</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Sugar Land & Houston, TX</div>
-    <h1 class="hero-title">
-      Where Tradition Meets<br>
-      <em>Happiness</em>
-    </h1>
-    <div class="hero-divider"></div>
-    <p class="hero-desc">
-      Professional saree sales, pre-pleating &amp; draping services for weddings, poojas, festivals, and every moment that deserves to be beautiful.
-    </p>
-    <div class="hero-actions">
-      <a href="tel:13468296459" class="btn-primary">Book an Appointment</a>
-      <a href="https://wa.me/13468296459?text=Hi%20Subhadra!%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book." target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp Us</a>
-      <a href="#services" class="btn-outline">Our Services</a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-num">$40+</div>
-        <div class="stat-label">Saree Draping</div>
-      </div>
-      <div>
-        <div class="stat-num">$35+</div>
-        <div class="stat-label">Pre-Pleating</div>
-      </div>
-      <div>
-        <div class="stat-num">$25+</div>
-        <div class="stat-label">Budget Sarees</div>
-      </div>
-      <div>
-        <div class="stat-num">$40+</div>
-        <div class="stat-label">Fancy Sarees</div>
-      </div>
-      <div>
-        <div class="stat-num">✂</div>
-        <div class="stat-label">Alterations & More</div>
+  <div class="hero-copy">
+    <div>
+      <h1 class="hero-title hero-in">Your saree, draped to perfection</h1>
+      <p class="hero-desc hero-in d1">Draping, pre-pleating, pico and falls in Sugar Land and Houston, plus sarees from $25. We come to you.</p>
+      <div class="hero-actions hero-in d2">
+        <a href="tel:13468296459" class="btn btn-gold"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg> Book an appointment</a>
+        <a href="https://wa.me/13468296459?text=Hi%20Subhadra!%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book." target="_blank" rel="noopener" class="btn btn-wa"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp us</a>
       </div>
     </div>
+    <ul class="price-list hero-in d3" aria-label="Starting prices">
+      <li><b>$40</b><span>Draping</span></li>
+      <li><b>$35</b><span>Pre-pleating</span></li>
+      <li><b>$25</b><span>Saree falls</span></li>
+      <li><b>$15</b><span>Saree pico</span></li>
+      <li><b>$25</b><span>Sarees from</span></li>
+    </ul>
   </div>
-  <div class="hero-right">
-    <div class="hero-img-frame">
-      <img src="hero-saree.jpg" alt="Bridal saree draping in Sugar Land, Houston by Sree Subha Sarees" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-      <div class="hero-img-placeholder" style="display:none;">
-        <span class="sari-icon">🥻</span>
-        <p>Sree Subha Sarees</p>
-      </div>
-      <div class="hero-badge">
-        <p>On-Site</p>
-        <p>Visits Available</p>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    Scroll to explore
+  <div class="hero-mosaic">
+    <figure class="m-a"><img src="hero-saree.jpg" alt="Cream saree with a gold border, neatly pleated and draped" width="521" height="582" fetchpriority="high" /></figure>
+    <figure class="m-b fade-stack" id="heroStack">
+      <img class="on" src="gallery6.jpg" alt="Close-up of crisp pre-pleated folds on a coral silk saree" />
+      <img src="gallery4.jpg" alt="Pre-pleated green and pink silk saree" />
+      <img src="sareeexam.jpg" alt="Pleats of a coral saree with a green border" />
+    </figure>
+    <figure class="m-c"><img src="art-silk-saree.jpg" alt="Pink art silk saree with gold motifs" /></figure>
+    <figure class="m-d"><img src="silk-cotton-saree.jpg" alt="Striped silk-cotton saree with tassels" /></figure>
   </div>
 </section>
 
-<!-- DIWALI BANNER (hides itself after the end date in the script below) -->
-<div class="festive-banner" id="festiveBanner">
-  <div class="festive-lamp" aria-hidden="true">🪔</div>
+<!-- DIWALI BAND (hides itself after the end date in the script below) -->
+<div class="festive-band" id="festiveBanner">
   <div>
-    <div class="festive-eyebrow">Happy Diwali</div>
-    <div class="festive-title">Celebrate Diwali with our <strong>all-new collection</strong></div>
-    <div class="festive-desc">Fresh festive sarees, blouses, kurtis and dhotis, just in for the festival of lights.</div>
-    <div class="festive-actions">
-      <a href="#sales" class="festive-btn">See the Collection</a>
-      <a href="https://wa.me/13468296459?text=Hi%20Subhadra!%20I%27d%20like%20to%20see%20your%20new%20Diwali%20collection." target="_blank" rel="noopener" class="festive-btn ghost">Ask on WhatsApp</a>
-    </div>
-    <div class="festive-fine">Need your saree draped or pre-pleated for Diwali? Book early, as festival dates fill up fast.</div>
+    <h2>Our new Diwali collection is in</h2>
+    <p>Fresh festive sarees, blouses, kurtis and dhotis for the festival of lights. Need a saree draped or pre-pleated for Diwali? Book early, as festival dates fill up fast.</p>
   </div>
-  <div class="festive-lamp" aria-hidden="true">🪔</div>
+  <div class="actions">
+    <a href="#sales" class="btn btn-wine">See the collection</a>
+    <a href="https://wa.me/13468296459?text=Hi%20Subhadra!%20I%27d%20like%20to%20see%20your%20new%20Diwali%20collection." target="_blank" rel="noopener" class="btn btn-quiet">Ask on WhatsApp</a>
+  </div>
 </div>
 <script>
   if (new Date() > new Date('2026-11-09T00:00:00-06:00')) document.getElementById('festiveBanner').remove();
 </script>
 
-<!-- MARQUEE -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-inner">
-    <span class="marquee-item">Saree Draping</span>
-    <span class="marquee-item">Pre-Pleating</span>
-    <span class="marquee-item">Saree Pico</span>
-    <span class="marquee-item">Saree Falls</span>
-    <span class="marquee-item">Fancy Sarees</span>
-    <span class="marquee-item">Budget Sarees</span>
-    <span class="marquee-item">Lightweight Designer Sarees</span>
-    <span class="marquee-item">Cloth Alteration</span>
-    <span class="marquee-item">Weddings · Poojas · Festivals</span>
-    <span class="marquee-item">Sugar Land · Houston</span>
-    <span class="marquee-item">Saree Draping</span>
-    <span class="marquee-item">Pre-Pleating</span>
-    <span class="marquee-item">Saree Pico</span>
-    <span class="marquee-item">Saree Falls</span>
-    <span class="marquee-item">Fancy Sarees</span>
-    <span class="marquee-item">Budget Sarees</span>
-    <span class="marquee-item">Lightweight Designer Sarees</span>
-    <span class="marquee-item">Cloth Alteration</span>
-    <span class="marquee-item">Weddings · Poojas · Festivals</span>
-    <span class="marquee-item">Sugar Land · Houston</span>
-  </div>
-</div>
-
-<!-- WHY CHOOSE US -->
-<section id="why">
-  <div class="section-eyebrow">The Sree Subha Difference</div>
-  <h2 class="section-title">Why <em>Choose Us</em></h2>
-  <div class="why-grid">
-    <div class="why-card fade-up">
-      <span class="why-icon">✅</span>
-      <h3 class="why-head">Effortless Elegance in Every Drape</h3>
-      <p class="why-text">Every pleat is placed with care so your saree falls gracefully and looks picture-perfect from start to finish.</p>
-    </div>
-    <div class="why-card fade-up fade-up-d1">
-      <span class="why-icon">⏱️</span>
-      <h3 class="why-head">Save Time with Perfect     Pre-Pleating</h3>
-      <p class="why-text">Pre-pleated sarees mean faster getting-ready time, less stress, and more moments to enjoy with family and friends.</p>
-    </div>
-    <div class="why-card fade-up fade-up-d2">
-      <span class="why-icon">✨</span>
-      <h3 class="why-head">Styled for Every Special Moment</h3>
-      <p class="why-text">Bridal, festive, or casual — each look is styled to match your personality and the mood of your event.</p>
-    </div>
-    <div class="why-card fade-up fade-up-d3">
-      <span class="why-icon">👑</span>
-      <h3 class="why-head">Friendly, Calm &amp; Detail-Focused</h3>
-      <p class="why-text">From pinning to final touch-ups, you'll feel comfortable, heard, and fully cared for throughout the entire process.</p>
-    </div>
-  </div>
-</section>
-
 <!-- SERVICES -->
 <section id="services">
-  <div class="section-eyebrow">What We Offer</div>
-  <h2 class="section-title">Our <em>Expert</em> Services</h2>
-  <div class="services-grid">
-
-    <!-- Saree Draping -->
-    <div class="uni-card fade-up">
-      <div class="uni-card-img">
-        <img src="saree-draping.jpg" alt="Professional saree draping Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Saree Draping</div>
-          <div class="uni-card-meta">1 Hour</div>
-        </div>
-        <div class="uni-card-price">From $40</div>
-      </div>
-      <div class="uni-card-desc">Effortless elegance for weddings, poojas, festivals &amp; parties in Sugar Land &amp; Houston. Each pleat placed with care.</div>
-      <div class="uni-card-footer">
-        <a href="#contact" class="service-link">Book Now →</a>
-        <button class="more-info-btn" onclick="togglePanel('panel-draping', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-draping">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Service Description</div>
-          <p class="detail-text">Elegant and professional saree draping for weddings, poojas, festivals, parties, and special occasions. Each pleat is placed with care so your saree sits comfortably, securely, and beautifully all day.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">I work with a variety of saree fabrics and draping styles, from traditional South Indian looks to more modern, minimalist drapes. You can relax and enjoy your event while I handle all the details.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pre-Pleated Saree -->
-    <div class="uni-card fade-up fade-up-d1">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#4a1528,#3a0d1e);">
-        <img src="pre-pleated-saree.jpg" alt="Pre-pleated saree service Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Pre-Pleated Saree</div>
-          <div class="uni-card-meta">1 Day Service</div>
-        </div>
-        <div class="uni-card-price">From $35</div>
-      </div>
-      <div class="uni-card-desc">Perfectly neat pleats prepared in advance so you look elegant, secure, and confident without the rush on your big day.</div>
-      <div class="uni-card-footer">
-        <a href="#contact" class="service-link">Book Now →</a>
-        <button class="more-info-btn" onclick="togglePanel('panel-pleated', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-pleated">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Service Description</div>
-          <p class="detail-text">Get beautifully neat and secure pleats prepared in advance for weddings, festivals, and special occasions. Your saree will be perfectly ironed, pleated, and ready to wear so you can focus on enjoying your day.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Pre-pleating is ideal if you want a stress-free dressing experience with flawless symmetry and comfort. Once your saree is pre-pleated, draping on the event day becomes quick and easy.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Saree Pico -->
-    <div class="uni-card fade-up fade-up-d2">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#3a1020,#280810);">
-        <img src="saree-pico.jpg" alt="Saree pico service Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Saree Pico</div>
-          <div class="uni-card-meta">Quick Turnaround</div>
-        </div>
-        <div class="uni-card-price">$15</div>
-      </div>
-      <div class="uni-card-desc">Clean, precise pico edging on your saree border for a neat, finished look that holds beautifully and lasts long.</div>
-      <div class="uni-card-footer">
-        <a href="#contact" class="service-link">Book Now →</a>
-        <button class="more-info-btn" onclick="togglePanel('panel-pico', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-pico">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Service Description</div>
-          <p class="detail-text">Saree pico is a delicate edging technique applied along the border of your saree to give it a clean, polished, and professional finish. It prevents fraying, adds a refined look, and makes your saree easier to drape and maintain.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Whether it's a new saree that needs finishing or an old favourite that needs care, we handle every saree with precision and attention to detail. Quick turnaround available.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Saree Falls -->
-    <div class="uni-card fade-up fade-up-d3">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#2d1a0a,#1a0a05);">
-        <img src="saree-falls.jpg" alt="Saree falls service Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Saree Falls</div>
-          <div class="uni-card-meta">Expert Finishing</div>
-        </div>
-        <div class="uni-card-price">$25</div>
-      </div>
-      <div class="uni-card-desc">Professionally stitched saree falls to give your saree the perfect weight, drape, and shape it deserves every time.</div>
-      <div class="uni-card-footer">
-        <a href="#contact" class="service-link">Book Now →</a>
-        <button class="more-info-btn" onclick="togglePanel('panel-falls', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-falls">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Service Description</div>
-          <p class="detail-text">A saree fall is a lining stitched along the bottom edge of your saree that gives it structure, weight, and a beautiful drape. It helps the saree fall gracefully, prevents the border from folding, and makes draping much easier and neater.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">We stitch falls in matching or complementary colours to perfectly suit your saree. Ideal for both new sarees and older ones that need a refresh. Drop off your saree and we'll have it ready for you quickly.</p>
-        </div>
-      </div>
-    </div>
-
+  <div class="svc-head">
+    <h2 class="fade-up">Draped, pleated and finished</h2>
+    <p class="fade-up fade-up-d1">Four services, done by hand by Subhadra. Bring your own saree or choose one from the collection, and we will have it ready for your day.</p>
   </div>
+  <div class="svc-grid">
+    <article class="svc fade-up">
+      <div class="svc-img"><img src="saree-draping.jpg" alt="Professional saree draping in Sugar Land" loading="lazy" width="768" height="512" /></div>
+      <div class="svc-body">
+        <div class="svc-top"><h3>Saree draping</h3><span class="price">From $40</span></div>
+        <p class="when">About 1 hour, at your home, hotel or venue</p>
+        <p>Elegant, secure draping for weddings, poojas, festivals and parties. Each pleat is placed with care so your saree sits comfortably and beautifully all day.</p>
+        <div class="detail-panel" id="panel-draping"><p>Traditional South Indian looks to modern, minimal drapes, in any fabric. You relax and enjoy your event while every detail is handled.</p></div>
+        <div class="more"><button class="more-info-btn" aria-expanded="false" aria-controls="panel-draping" onclick="togglePanel('panel-draping', this)">More about saree draping <span class="arrow">&rarr;</span></button></div>
+      </div>
+    </article>
+    <article class="svc fade-up fade-up-d1">
+      <div class="svc-img"><img src="pre-pleated-saree.jpg" alt="Pre-pleated saree, ironed and folded" loading="lazy" width="768" height="512" /></div>
+      <div class="svc-body">
+        <div class="svc-top"><h3>Pre-pleating</h3><span class="price">From $35</span></div>
+        <p class="when">Ready in one day</p>
+        <p>Your saree ironed, pleated and folded in advance, so on the day it drapes in about five minutes with flawless symmetry.</p>
+        <div class="detail-panel" id="panel-pleated"><p>Ideal for travel and busy wedding mornings: you get clear instructions on how to wear it and pack it.</p></div>
+        <div class="more"><button class="more-info-btn" aria-expanded="false" aria-controls="panel-pleated" onclick="togglePanel('panel-pleated', this)">More about pre-pleating <span class="arrow">&rarr;</span></button></div>
+      </div>
+    </article>
+    <article class="svc fade-up fade-up-d2">
+      <div class="svc-img"><img src="saree-pico.jpg" alt="Pico edging stitched along a saree border" loading="lazy" width="768" height="512" /></div>
+      <div class="svc-body">
+        <div class="svc-top"><h3>Saree pico</h3><span class="price">$15</span></div>
+        <p class="when">Quick turnaround</p>
+        <p>A fine edging stitched along the border so it never frays, drapes cleaner and is easier to care for.</p>
+        <div class="detail-panel" id="panel-pico"><p>For a new saree that needs finishing or an old favourite that needs care.</p></div>
+        <div class="more"><button class="more-info-btn" aria-expanded="false" aria-controls="panel-pico" onclick="togglePanel('panel-pico', this)">More about saree pico <span class="arrow">&rarr;</span></button></div>
+      </div>
+    </article>
+    <article class="svc fade-up fade-up-d3">
+      <div class="svc-img"><img src="saree-falls.jpg" alt="Saree fall lining stitched to the hem" loading="lazy" width="768" height="512" /></div>
+      <div class="svc-body">
+        <div class="svc-top"><h3>Saree falls</h3><span class="price">$25</span></div>
+        <p class="when">Matched to your saree</p>
+        <p>A lining stitched along the hem that gives the saree weight and shape, so it falls gracefully and the border never folds.</p>
+        <div class="detail-panel" id="panel-falls"><p>Stitched in a matching or complementary colour, for new sarees and old ones that need a refresh.</p></div>
+        <div class="more"><button class="more-info-btn" aria-expanded="false" aria-controls="panel-falls" onclick="togglePanel('panel-falls', this)">More about saree falls <span class="arrow">&rarr;</span></button></div>
+      </div>
+    </article>
+  </div>
+
+  <form class="planner fade-up" id="planner" action="https://wa.me/13468296459?text=Hi%20Subhadra!%20I%20found%20you%20on%20your%20website%20and%20would%20like%20to%20book." method="get" target="_blank">
+    <div>
+      <h3>Plan your booking</h3>
+      <p>Pick what you need and how many sarees. You will see the starting price, and the plan goes to Subhadra on WhatsApp, ready to confirm.</p>
+      <p class="planner-total"><output class="total" id="pTotal" aria-live="polite">from $40</output> <span class="total-note">is the starting price. Subhadra confirms the final quote.</span></p>
+    </div>
+    <div>
+      <fieldset>
+        <legend>Services</legend>
+        <label class="pick"><input type="checkbox" name="svc" value="Saree draping" data-price="40" checked /><span>Saree draping <b>$40</b></span></label>
+        <label class="pick"><input type="checkbox" name="svc" value="Pre-pleating" data-price="35" /><span>Pre-pleating <b>$35</b></span></label>
+        <label class="pick"><input type="checkbox" name="svc" value="Saree falls" data-price="25" /><span>Saree falls <b>$25</b></span></label>
+        <label class="pick"><input type="checkbox" name="svc" value="Saree pico" data-price="15" /><span>Saree pico <b>$15</b></span></label>
+      </fieldset>
+      <div class="planner-row">
+        <div class="count" role="group" aria-label="Number of sarees">
+          <button type="button" id="cMinus" aria-label="One saree fewer">&minus;</button>
+          <output id="cOut" aria-live="polite">1</output>
+          <button type="button" id="cPlus" aria-label="One saree more">+</button>
+          <span>saree<span id="cS" hidden>s</span></span>
+        </div>
+        <button type="submit" class="btn btn-gold"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Send this plan on WhatsApp</button>
+      </div>
+    </div>
+  </form>
 </section>
 
-<!-- SAREE COLLECTION -->
+<!-- WHY -->
+<section id="why">
+  <div class="why-intro">
+    <h2 class="fade-up">Why brides and families come back</h2>
+    <p class="fade-up fade-up-d1">Rated 5.0 on Google by 32 clients. Most of them mention the same thing: pleats that stay neat all day.</p>
+    <div class="why-photo fade-up fade-up-d2"><img src="gallery11.jpeg" alt="Pink silk saree pre-pleated and ready to wear" loading="lazy" /></div>
+  </div>
+  <ul class="why-list">
+    <li class="fade-up"><h3>Every pleat placed by hand</h3><p>Each fold is measured and pinned so the saree falls gracefully and looks the same at the last dance as at the first photo.</p></li>
+    <li class="fade-up fade-up-d1"><h3>Dressed in five minutes</h3><p>A pre-pleated saree means less stress on the morning of the event, and more time with family and friends.</p></li>
+    <li class="fade-up fade-up-d2"><h3>Styled for your occasion</h3><p>Bridal, festive or casual; South Indian, Bengali, Madisar or modern. Each look is matched to you and your event.</p></li>
+    <li class="fade-up fade-up-d3"><h3>Calm, friendly and on time</h3><p>Home and hotel visits across the Houston area. From pinning to final touches, you are looked after without a rush.</p></li>
+    <blockquote class="fade-up">&ldquo;My event was 8 hours and the draping stayed perfect. This was my first time wearing a saree!&rdquo;<cite>Saher Haider, on Google</cite></blockquote>
+  </ul>
+</section>
+
+<!-- COLLECTION -->
 <section id="sales">
-  <div class="section-eyebrow">Curated Collection</div>
-  <h2 class="section-title">Sarees &amp; More for <em>Every Budget</em></h2>
-  <div class="collection-grid">
-
-    <!-- Lightweight Designer Sarees -->
-    <div class="uni-card fade-up">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#1a2d3a,#0a1520);">
-        <img src="sale3.jpg" alt="Lightweight designer sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
+  <div class="cat-head">
+    <h2 class="fade-up">Sarees for every budget</h2>
+    <p class="fade-up fade-up-d1">New stock for the season, from everyday cottons to festive silks, plus blouses, kurtis, dhotis and tees. Ask on WhatsApp for photos of what is in stock today.</p>
+  </div>
+  <div class="catalogue">
+    <article class="spec fade-up big">
+      <div class="spec-tile"><img src="sale1.jpg" alt="Teal and blue fancy saree with woven diamond pattern" loading="lazy" /></div>
+      <div class="spec-info"><h3>Fancy sarees</h3><span class="price">From $40</span></div>
+      <p class="fact">Many designs, for every occasion</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-fancy" onclick="togglePanel('panel-fancy', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-fancy"><p>A wide variety of sarees in different fabrics, colours and styles. Prices start at $40, and each saree is chosen for quality, comfort and elegance.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d1">
+      <div class="spec-tile"><img src="sale3.jpg" alt="Lavender lightweight designer saree" loading="lazy" /></div>
+      <div class="spec-info"><h3>Lightweight designer sarees</h3><span class="price">From $40</span></div>
+      <p class="fact">Georgette, chiffon and soft silk blends</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-lightweight" onclick="togglePanel('panel-lightweight', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-lightweight"><p>Look stunning without feeling weighed down. Breathable fabrics that drape beautifully and stay comfortable through long events.</p><p>Designer prints, embroidery and embellishment for casual gatherings and semi-formal events alike.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d2">
+      <div class="spec-tile"><img src="sale2.jpg" alt="Gold budget saree with woven motifs" loading="lazy" /></div>
+      <div class="spec-info"><h3>Budget sarees</h3><span class="price">From $25</span></div>
+      <p class="fact">Everyday and casual wear</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-budget" onclick="togglePanel('panel-budget', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-budget"><p>Sarees for everyday occasions and casual wear in many fabrics, colours and styles, from $25, each chosen for quality and comfort.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d3">
+      <div class="spec-tile"><img src="silk-cotton-saree.jpg" alt="Bright striped silk-cotton saree with tassels" loading="lazy" /></div>
+      <div class="spec-info"><h3>Silk-cotton sarees</h3><span class="price">In stock</span></div>
+      <p class="fact">Zari borders, ikat, tasselled pallus</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-silkcotton" onclick="togglePanel('panel-silkcotton', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-silkcotton"><p>The sheen of silk with the lightness of cotton: graceful, airy and never heavy.</p><p>Right for poojas, festivals, family functions and work events.</p></div>
+    </article>
+    <article class="spec fade-up">
+      <div class="spec-tile"><img src="art-silk-saree.jpg" alt="Pink art silk saree with gold motifs" loading="lazy" /></div>
+      <div class="spec-info"><h3>Art silk sarees</h3><span class="price">In stock</span></div>
+      <p class="fact">The silk look, easy to care for</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-artsilk" onclick="togglePanel('panel-artsilk', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-artsilk"><p>The grand look of traditional silk, with zari motifs and woven borders, at a gentler price and much easier to maintain.</p><p>A lovely choice for weddings, receptions, festivals and gifting.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d1">
+      <div class="spec-tile"><img src="pure-cotton-saree.jpg" alt="Maroon pure cotton saree with woven border" loading="lazy" /></div>
+      <div class="spec-info"><h3>Pure cotton sarees</h3><span class="price">In stock</span></div>
+      <p class="fact">Made for Houston summers</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-cotton" onclick="togglePanel('panel-cotton', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-cotton"><p>Soft, breathable and easy to drape: for daily wear, the office, temple visits and casual gatherings.</p><p>Woven borders, classic checks and vivid solids. Cotton softens with every wash and holds pleats beautifully.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d2">
+      <div class="spec-tile"><img src="nine-yard-saree.jpg" alt="Teal 9 yard cotton saree with temple border" loading="lazy" /></div>
+      <div class="spec-info"><h3>9 yard cotton sarees</h3><span class="price">In stock</span></div>
+      <p class="fact">For Madisar and traditional drapes</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-nineyard" onclick="togglePanel('panel-nineyard', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-nineyard"><p>Made for traditional drapes like the Madisar, worn for weddings, Seemantham and poojas.</p><p>Soft cotton with temple and woven borders, comfortable through long ceremonies. We can drape it for you too.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d3">
+      <div class="spec-tile"><img src="readymade-blouse.jpg" alt="Green embroidered readymade saree blouse" loading="lazy" /></div>
+      <div class="spec-info"><h3>Readymade blouses</h3><span class="price">In stock</span></div>
+      <p class="fact">Pick your size and wear it today</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-blouses" onclick="togglePanel('panel-blouses', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-blouses"><p>No tailoring needed. A range of sizes, colours and styles to match or contrast with your saree, from simple everyday blouses to festive designs.</p></div>
+    </article>
+    <article class="spec fade-up">
+      <div class="spec-tile"><img src="kurti.jpg" alt="Blue embroidered kurti" loading="lazy" /></div>
+      <div class="spec-info"><h3>Kurtis</h3><span class="price">In stock</span></div>
+      <p class="fact">Everyday ethnic wear</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-kurtis" onclick="togglePanel('panel-kurtis', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-kurtis"><p>Comfortable, stylish kurtis for work, college and festive days, in soft fabrics with embroidery and prints.</p><p>Pair them with leggings, pants or palazzos. Many colours, designs and sizes.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d1">
+      <div class="spec-tile"><img src="dhoti.jpg" alt="White dhoti with gold border" loading="lazy" /></div>
+      <div class="spec-info"><h3>Dhotis</h3><span class="price">In stock</span></div>
+      <p class="fact">Traditional menswear</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-dhotis" onclick="togglePanel('panel-dhotis', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-dhotis"><p>Classic dhotis for weddings, poojas, temple visits and festivals, in white and cream with gold zari and coloured borders.</p></div>
+    </article>
+    <article class="spec fade-up fade-up-d2">
+      <div class="spec-tile"><img src="sale4.jpg" alt="Brown printed cotton T-shirt" loading="lazy" /></div>
+      <div class="spec-info"><h3>Cotton printed T-shirts</h3><span class="price">From $10</span></div>
+      <p class="fact">Sizes M to XXL</p>
+      <button class="more-info-btn" aria-expanded="false" aria-controls="panel-tshirts" onclick="togglePanel('panel-tshirts', this)">Details <span class="arrow">&rarr;</span></button>
+      <div class="detail-panel" id="panel-tshirts"><p>100% cotton tees for women: soft, breathable and durable, for outings, lounging or layering.</p><p>Many designs, colours and prints, in Medium, Large, X-Large and XX-Large.</p></div>
+    </article>
+    <aside class="spec-more fade-up">
+      <div>
+        <h3>Looking for something else?</h3>
+        <p>New pieces arrive every few weeks. Tell us the colour, fabric or occasion and we will send photos of what is in stock.</p>
       </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Lightweight Designer Sarees</div>
-          <div class="uni-card-meta">Comfort meets style</div>
-        </div>
-        <div class="uni-card-price">From $40</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-lightweight', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-lightweight">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Our lightweight designer sarees are perfect for those who want to look stunning without feeling weighed down. Made from breathable, soft fabrics like georgette, chiffon, and soft silk blends, these sarees drape beautifully and feel incredibly comfortable even during long events.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Each piece features elegant designer prints, embroidery, or embellishments that make you stand out at any occasion — from casual gatherings to semi-formal events. Light on the body, big on style.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fancy Sarees -->
-    <div class="uni-card fade-up fade-up-d1">
-      <div class="uni-card-img">
-        <img src="sale1.jpg" alt="Fancy sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">Featured</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Fancy Sarees</div>
-          <div class="uni-card-meta">Variety of designs &amp; all occasions</div>
-        </div>
-        <div class="uni-card-price">From $40</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-fancy', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-fancy">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">We offer a wide variety of sarees for different occasions. Our sarees come in different fabrics, colors, and styles to match your preference and comfort. Price ranges start from $40 and each saree is carefully selected to ensure quality, comfort, and elegance.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Budget Sarees -->
-    <div class="uni-card fade-up fade-up-d2">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#3d1020,#280a15);">
-        <img src="sale2.jpg" alt="Budget sarees Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">Best Value</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Budget Sarees</div>
-          <div class="uni-card-meta">Everyday elegance &amp; casual wear</div>
-        </div>
-        <div class="uni-card-price">From $25</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-budget', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-budget">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">We offer a wide variety of sarees for everyday occasions and casual wear. Our sarees come in different fabrics, colors, and styles to match your preference and comfort. Price ranges start from $25, and each saree is carefully selected to ensure quality, comfort, and elegance.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pure Cotton Sarees -->
-    <div class="uni-card fade-up fade-up-d3">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#3d1020,#280a15);">
-        <img src="pure-cotton-saree.jpg" alt="Pure cotton sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Pure Cotton Sarees</div>
-          <div class="uni-card-meta">Breathable everyday comfort</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-cotton', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-cotton">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Our pure cotton sarees are soft, breathable, and perfect for Houston's warm weather. Light on the body and easy to drape, they are ideal for daily wear, office, temple visits, and casual gatherings.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Choose from traditional woven borders, classic checks, and vibrant solid colours. Cotton gets softer with every wash and holds pleats beautifully — a timeless favourite for every wardrobe.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Silk-Cotton Sarees -->
-    <div class="uni-card fade-up">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#1a2d3a,#0a1520);">
-        <img src="silk-cotton-saree.jpg" alt="Silk cotton sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Silk-Cotton Sarees</div>
-          <div class="uni-card-meta">The best of silk & cotton</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-silkcotton', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-silkcotton">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Silk-cotton sarees blend the rich sheen of silk with the lightness and comfort of cotton. They drape gracefully, feel airy all day, and look elegant without being heavy.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Perfect for poojas, festivals, family functions, and work events. Available in bright colours with zari borders, ikat patterns, and tasselled pallus.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Art Silk Sarees -->
-    <div class="uni-card fade-up fade-up-d1">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#4a1528,#3a0d1e);">
-        <img src="art-silk-saree.jpg" alt="Art silk sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Art Silk Sarees</div>
-          <div class="uni-card-meta">Rich look, easy care</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-artsilk', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-artsilk">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Art silk sarees give you the grand look of traditional silk with zari motifs and woven borders, at a price that's easy on the budget. They are lightweight and much easier to maintain than pure silk.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">A wonderful choice for weddings, receptions, festivals, and gifting. Available in a range of rich colours and designs.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 9 Yard Cotton Sarees -->
-    <div class="uni-card fade-up fade-up-d2">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#3a1020,#280810);">
-        <img src="nine-yard-saree.jpg" alt="9 yard cotton madisar sarees Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">9 Yard Cotton Sarees</div>
-          <div class="uni-card-meta">Madisar & traditional drapes</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-nineyard', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-nineyard">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Our 9 yard cotton sarees are made for traditional drapes like the Madisar, worn for weddings, Seemantham, poojas, and other auspicious occasions.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Made from soft, breathable cotton with classic temple and woven borders, they are comfortable to wear through long ceremonies. Not sure how to wear a 9 yard saree? We also offer professional draping so you look perfect on your special day.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kurtis -->
-    <div class="uni-card fade-up fade-up-d3">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#1a2d3a,#0a1520);">
-        <img src="kurti.jpg" alt="Kurtis for women Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;object-position:center 20%;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Kurtis</div>
-          <div class="uni-card-meta">Everyday ethnic wear</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-kurtis', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-kurtis">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Comfortable and stylish kurtis for work, college, casual outings, and festive days. Made from soft, breathable fabrics with beautiful embroidery and prints.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Pair them with leggings, pants, or palazzos for an easy, elegant look. Available in a variety of colours, designs, and sizes.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Readymade Blouses -->
-    <div class="uni-card fade-up">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#4a1528,#3a0d1e);">
-        <img src="readymade-blouse.jpg" alt="Readymade saree blouses Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Readymade Blouses</div>
-          <div class="uni-card-meta">Ready to wear, perfect fit</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-blouses', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-blouses">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Save time with our readymade saree blouses — no tailoring needed. Simply pick your size and colour and you're ready to go.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Available in a range of sizes, colours, and styles to match or contrast with your saree, from simple everyday blouses to festive designs.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cotton T-Shirts -->
-    <div class="uni-card fade-up fade-up-d1">
-      <div class="uni-card-img" style="background:linear-gradient(160deg,#2a2a2a,#151515);">
-        <img src="sale4.jpg" alt="100% cotton t-shirts for women Sugar Land Houston" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">100% Cotton Printed T-Shirts</div>
-          <div class="uni-card-meta">Comfortable everyday wear</div>
-        </div>
-        <div class="uni-card-price">From $10</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-tshirts', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-tshirts">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Our 100% cotton t-shirts for women are made for everyday comfort without compromising on style. Soft, breathable, and durable, these tees are perfect for casual outings, lounging at home, or layering under your favourite outfit.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Available in a variety of designs, colors, and prints to suit every taste, and offered in every size — Medium, Large, X-Large, and XX-Large — so there's a perfect fit for everyone.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dhotis -->
-    <div class="uni-card fade-up fade-up-d2">
-      <div class="uni-card-img" style="background:#f4f2ef;">
-        <img src="dhoti.jpg" alt="Traditional dhotis for men Sugar Land Houston" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" onerror="this.style.display='none';" />
-        <span class="uni-card-tag">New</span>
-      </div>
-      <div class="uni-card-body">
-        <div>
-          <div class="uni-card-name">Dhotis</div>
-          <div class="uni-card-meta">Traditional menswear</div>
-        </div>
-        <div class="uni-card-price">Available Now</div>
-      </div>
-      <div class="uni-card-footer">
-        <button class="more-info-btn" onclick="togglePanel('panel-dhotis', this)">More Info <span class="arrow">→</span></button>
-      </div>
-      <div class="detail-panel" id="panel-dhotis">
-        <div class="collection-detail-inner">
-          <div class="detail-section-title">Collection Details</div>
-          <p class="detail-text">Classic dhotis for men, perfect for weddings, poojas, temple visits, and festivals. Comfortable, breathable, and easy to wear.</p>
-          <p class="detail-text" style="margin-top:0.7rem;">Available in traditional white and cream with elegant gold zari and coloured borders.</p>
-        </div>
-      </div>
-    </div>
-
+      <a href="https://wa.me/13468296459?text=Hi%20Subhadra!%20Could%20you%20send%20me%20photos%20of%20the%20sarees%20you%20have%20in%20stock%3F" target="_blank" rel="noopener" class="btn btn-gold"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Ask for photos</a>
+    </aside>
   </div>
 </section>
 
-<!-- SHARED AREAS & CONTACT -->
-<section class="areas-section" style="background:var(--cream);padding:0 6rem 4rem;">
-  <div class="areas-grid" style="max-width:900px;margin:0 auto;border-top:1px solid rgba(201,168,76,0.2);padding-top:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gal-head">
     <div>
-      <div class="detail-section-title">Areas We Serve</div>
-      <div class="detail-locations" style="margin-top:1rem;">
-        <span class="detail-loc-tag">Sugar Land</span>
-        <span class="detail-loc-tag">Missouri City</span>
-        <span class="detail-loc-tag">Stafford</span>
-        <span class="detail-loc-tag">Pearland</span>
-        <span class="detail-loc-tag">Houston</span>
-        <span class="detail-loc-tag">Katy</span>
-        <span class="detail-loc-tag">Cypress</span>
-        <span class="detail-loc-tag">Fulshear</span>
-      </div>
+      <h2 class="fade-up">Pleated by Subhadra</h2>
+      <p class="fade-up fade-up-d1">Recent sarees, ironed, pre-pleated and ready to wear.</p>
     </div>
-    <div>
-      <div class="detail-section-title">Contact Us</div>
-      <div style="margin-top:1rem;">
-        <div class="detail-contact-row"><span class="detail-contact-icon">📞</span><a href="tel:13468296459">346-829-6459</a></div>
-        <div class="detail-contact-row"><span class="detail-contact-icon">✉</span><a href="mailto:subhadra.jayaharan@gmail.com">subhadra.jayaharan@gmail.com</a></div>
-        <div class="detail-contact-row"><span class="detail-contact-icon">📍</span>Sugar Land, TX, USA</div>
-      </div>
+    <div class="arrows fade-up fade-up-d2">
+      <button class="t-arrow" onclick="moveGallery(-1)" aria-label="Previous photo">&larr;</button>
+      <button class="t-arrow" onclick="moveGallery(1)" aria-label="Next photo">&rarr;</button>
     </div>
   </div>
-</section>
-
-<!-- GALLERY SLIDER -->
-<section id="gallery" style="padding:7rem 0;background:var(--deep);overflow:hidden;">
-  <div style="padding:0 6rem;">
-    <div class="section-eyebrow" style="color:var(--gold);">Our Work</div>
-    <h2 class="section-title" style="color:var(--cream);">A Glimpse of <em>Elegance</em></h2>
-  </div>
-
   <div class="g-outer" id="gOuter">
     <div class="g-track" id="gTrack">
-      <div class="g-cell"><img loading="lazy" src="gallery3.jpg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery4.jpg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery5.jpg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery6.jpg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery7.jpeg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery8.jpeg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery9.jpeg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery10.jpeg" alt="Saree by Sree Subha Sarees" /></div>
-      <div class="g-cell"><img loading="lazy" src="gallery11.jpeg" alt="Saree by Sree Subha Sarees" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery3.jpg" alt="Gold and purple silk saree, pre-pleated" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery4.jpg" alt="Green silk saree with a pink border, pre-pleated" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery5.jpg" alt="Blue saree with a pink and orange border, pleated" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery6.jpg" alt="Coral silk saree with green border, pleated" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery7.jpeg" alt="Blue patterned silk saree, pleated on a hanger" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery8.jpeg" alt="Orange silk saree, pleated on a hanger" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery9.jpeg" alt="Yellow and pink silk saree, pleated" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery10.jpeg" alt="Embroidered cream saree, pleated" /></div>
+      <div class="g-cell"><img loading="lazy" src="gallery11.jpeg" alt="Pink silk saree, pleated" /></div>
     </div>
   </div>
-
   <div class="g-dots" id="gDots"></div>
+</section>
 
-  <div style="display:flex;justify-content:center;gap:1rem;margin-top:2rem;">
-    <button class="t-arrow" onclick="moveGallery(-1)">←</button>
-    <button class="t-arrow" onclick="moveGallery(1)">→</button>
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="gal-head">
+    <div>
+      <h2 class="fade-up">Real women, real reviews</h2>
+      <div class="rating fade-up fade-up-d1"><b>5.0</b><a class="text-link" href="https://www.google.com/search?q=Sree+Subha+Sarees+Sugar+Land+TX+reviews" target="_blank" rel="noopener">32 reviews on Google</a></div>
+    </div>
+    <div class="arrows fade-up fade-up-d2">
+      <button class="t-arrow" id="tPrev" onclick="moveCarousel(-1)" aria-label="Previous review">&larr;</button>
+      <button class="t-arrow" id="tNext" onclick="moveCarousel(1)" aria-label="Next review">&rarr;</button>
+    </div>
+  </div>
+  <div class="t-outer">
+    <div class="t-track" id="tTrack">
+      <figure class="t-card">
+        <blockquote class="t-quote">“I shared the style I wanted done and she was able to do it for me. Sari stayed in place and was comfortable. Arrived on time.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">LH</span><span class="t-name">Little Hummingbird</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra was so professional and kind. She took her time to drape the saree perfectly. I felt at ease to dance late into the night in the saree. Will definitely use her again.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SR</span><span class="t-name">Sowmya Rao</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“I had a wonderful experience with the saree draping service! The saree was draped beautifully, the pleats were neat, and it stayed comfortable and secure throughout the event. She was professional, patient, and paid attention to every detail. Highly recommend!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">VF</span><span class="t-name">Vafa Favas</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra did a great job pre-pleating my saree for a wedding event. She also gave clear instructions on how to drape the pre-pleated saree and pack it in my suitcase. It definitely made my life so much easier.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SY</span><span class="t-name">Sudha Yalamanchili</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Absolutely loved the saree draping, so elegant, neat, and perfectly done!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">CM</span><span class="t-name">Chaithanya Ms</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“She did the saree pre-pleating for me, it was very perfect and wonderful. Definitely recommend her!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SR</span><span class="t-name">Sujitha Ravichandran</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Saree pleating was done very well.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">RS</span><span class="t-name">Rupal Shah</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Excellent service, highly recommend! Subhadra is very personable and professional. Pre-pleating and pressed saree was perfect and so easy to drape.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">RM</span><span class="t-name">Rakhee Matlapudi</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“I needed my saree pleated for a very important occasion (Onam). I called a few places and no one had availability, but she was very timely and helpful. The saree was very easy to wear.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">KN</span><span class="t-name">Keny Nair</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra did a fantastic job with saree pre-pleating and also draped the saree for me. It was perfectly pleated and draped and I received several compliments. I will be using these services regularly! Thank you so much”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SM</span><span class="t-name">Sunanda Muralee</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Saree pleating was very good. Saves time in draping. I tried it for the first time, friendly service. I got this service number through a friend.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SS</span><span class="t-name">Sundari Subramanian</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“The saree pleating is neat and good, and it makes it easy for me to drape the saree within 5 minutes.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">AS</span><span class="t-name">Anusha Sama</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Very nice pleating, and very fast and easy communication!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">AG</span><span class="t-name">Ammu Gopan</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“She is very patient and sari fitting and draping is very professional and good quality work. Highly recommend!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SB</span><span class="t-name">Sindhu Baskaran</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Accurate measurement. Excellent pleating. Will recommend.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">RB</span><span class="t-name">Revathi Baskaran</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Amazing service, came on time and her draping is flawless. My event was 8 hours and the draping stayed perfect. This was my first time wearing a saree!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SH</span><span class="t-name">Saher Haider</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra was very helpful and prompt. She draped for me, my younger daughter, and my sister visiting from Arizona. Many friends also got draped by her at my daughter's wedding. She was punctual and even did a Bengali style drape!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">MD</span><span class="t-name">Mou Das</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subha was very professional. She arrived on time at my hotel and draped my saree to perfection. She pinned it so well that I didn't have to worry at all. Highly recommend!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">AH</span><span class="t-name">Alizeh Hussain</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra did a fantastic job of saree pre-pleating. It was super easy and effortless, took less than 5 mins to get the saree draped!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">SS</span><span class="t-name">Sreedhevi Sampath</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“She was great at putting together my saree just the way I wanted! It was perfectly pleated and folded without causing any issues. 10/10 would recommend.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">NR</span><span class="t-name">Nikitha Reddy</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“I hired Subhadra for a wedding and she did a wonderful job for all sarees and was always on time. Would hire her again for any event in the Houston area.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">AP</span><span class="t-name">Anu Peter</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subha did a great job pre-pleating a saree. I was able to drape it in 5 minutes!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">AV</span><span class="t-name">Anusha Velagapudi</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Saree draping was comfortable and efficient. Very easy and fast communication.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">BD</span><span class="t-name">Bhagyashri Deshmukh</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra, thank you for pre-pleating the sarees. It was very well done and so easy to wear.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">JK</span><span class="t-name">Josna Kotturappa</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Very nice pleating and quick. I would recommend this. Good luck!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">HL</span><span class="t-name">Harini Lokam</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Saree was draped and so easy to wear.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">AA</span><span class="t-name">Angela A</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra has done an excellent job for me. Saree was perfect. I really appreciate her for her good job.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">NT</span><span class="t-name">Nina Thomas</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Subhadra did a very good job on draping my saree. She is very dependable and has great communication.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">GJ</span><span class="t-name">George Joseph</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Loved the saree draping, it was neat, beautiful, and stayed in place all day. Highly recommend!”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">JS</span><span class="t-name">Jeladhara S</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“Recently Subha did a great job pre-pleating my saree. I was able to drape it in 5 mins, highly recommend Subha for saree pre-pleating.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">MA</span><span class="t-name">Mercy Abraham</span></figcaption>
+      </figure>
+      <figure class="t-card">
+        <blockquote class="t-quote">“All my sarees were pressed and pleated perfectly. I highly recommend Subhadra. Thank you for completing everything on time.”</blockquote>
+        <figcaption class="t-author"><span class="t-avatar" aria-hidden="true">GR</span><span class="t-name">Geetha Ravula</span></figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="t-dots" id="tDots"></div>
+  <div class="review-cta">
+    <a href="https://g.page/r/CU7vVYFiqTotEAE/review" target="_blank" rel="noopener" class="btn btn-wine">Leave us a review</a>
+    <p>Had your saree draped or pleated with us? We would love to hear about it.</p>
   </div>
 </section>
 
-<style>
-  .g-outer { overflow:hidden; cursor:grab; user-select:none; padding:2rem 0; }
-  .g-outer.dragging { cursor:grabbing; }
-  .g-track {
-    display:flex; gap:1rem; padding:0 6rem; align-items:flex-start;
-    transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-    will-change:transform;
-  }
-  .g-cell { width:360px; height:480px; flex:0 0 360px; overflow:hidden; background:#2a0d1a; flex-shrink:0; }
-  .g-cell:nth-child(2), .g-cell:nth-child(4) { width:280px; height:280px; flex:0 0 280px; align-self:center; }
-  .g-cell img { width:100%; height:100%; object-fit:contain; object-position:center center; display:block; transition:transform 0.4s ease; background:#1a0a14; }
-  .g-cell:hover img { transform:scale(1.04); }
-  .g-dots { display:flex; justify-content:center; gap:0.5rem; margin-top:1.5rem; }
-  .g-dot { width:8px; height:8px; border-radius:50%; background:rgba(201,168,76,0.3); border:none; cursor:pointer; transition:background 0.3s, width 0.3s; }
-  .g-dot.active { background:var(--gold); width:24px; border-radius:4px; }
-  @media (max-width:900px) {
-    .g-track { padding:0 1.5rem; gap:0.75rem; }
-    .g-cell { width:calc(100vw - 3rem) !important; height:420px !important; flex:0 0 calc(100vw - 3rem) !important; align-self:auto !important; }
-    .g-cell:nth-child(2), .g-cell:nth-child(4) { width:calc(100vw - 3rem) !important; height:420px !important; flex:0 0 calc(100vw - 3rem) !important; align-self:auto !important; }
-  }
-</style>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="coupon">
+    <div class="coupon-left">
+      <div>
+        <h2>Ready to look stunning?</h2>
+        <p>Call, message or send the form, and Subhadra will get back to you about your date.</p>
+      </div>
+      <ul class="contact-list">
+        <li><span class="k">Phone and WhatsApp</span><a class="v" href="tel:13468296459">346-829-6459</a></li>
+        <li><span class="k">Email</span><a class="v" href="mailto:subhadra.jayaharan@gmail.com">subhadra.jayaharan@gmail.com</a></li>
+        <li><span class="k">Instagram</span><a class="v" href="https://instagram.com/sreesubhasarees" target="_blank" rel="noopener">@sreesubhasarees</a></li>
+        <li><span class="k">Address</span><span class="v">225 Fluor Daniel Dr, Sugar Land, TX</span></li>
+      </ul>
+      <p class="areas">Serving Sugar Land, Stafford, Missouri City, Pearland, Houston, Katy, Cypress and Fulshear.</p>
+    </div>
+    <div class="coupon-form">
+      <h3>Send a message</h3>
+      <div class="field-pair">
+        <div class="field"><label for="f-name">Your name</label><input type="text" id="f-name" autocomplete="name" placeholder="Full name" /></div>
+        <div class="field"><label for="f-phone">Phone number</label><input type="tel" id="f-phone" autocomplete="tel" placeholder="Your contact number" /></div>
+      </div>
+      <div class="field-pair">
+        <div class="field"><label for="f-service">Interested in</label>
+          <select id="f-service">
+            <option value="" disabled selected>Choose a service</option>
+            <option>Saree Draping</option>
+            <option>Saree Pre-Pleating</option>
+            <option>Saree Pico</option>
+            <option>Saree Falls</option>
+            <option>Lightweight Designer Sarees</option>
+            <option>Fancy Sarees</option>
+            <option>Budget Sarees</option>
+            <option>Pure Cotton Sarees</option>
+            <option>Silk-Cotton Sarees</option>
+            <option>Art Silk Sarees</option>
+            <option>9 Yard Cotton Sarees</option>
+            <option>Kurtis</option>
+            <option>Readymade Blouses</option>
+            <option>100% Cotton T-Shirts</option>
+            <option>Dhotis</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-occasion">Event or occasion</label><input type="text" id="f-occasion" placeholder="Wedding, pooja, festival" /></div>
+      </div>
+      <div class="field"><label for="f-message">Message</label><textarea id="f-message" placeholder="Your event date, style preferences or any questions"></textarea></div>
+      <button class="btn btn-gold btn-submit" onclick="sendWhatsApp()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Send via WhatsApp</button>
+    </div>
+  </div>
+  <div class="map">
+    <iframe title="Map of Sugar Land, TX"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55839.37961153236!2d-95.670551!3d29.593015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640e66f886ffb4b%3A0x9bd9e2c22de0f841!2sSugar%20Land%2C%20TX!5e0!3m2!1sen!2sus!4v1703960000000"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-name" aria-hidden="true">Sree Subha Sarees</p>
+  <div class="footer-row">
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#sales">Collection</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Sree Subha Sarees, Sugar Land, Texas</p>
+  </div>
+</footer>
+
+<a href="tel:13468296459" class="float-call float-phone" aria-label="Call to book"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg></a>
+<a href="https://wa.me/13468296459" target="_blank" rel="noopener" class="float-call float-wa" aria-label="WhatsApp us"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
 <script>
   (function(){
@@ -1517,7 +1044,7 @@
     cells.forEach((_, i) => {
       if (i > maxIdx()) return;
       const d = document.createElement('button');
-      d.className = 'g-dot' + (i===0?' active':'');
+      d.className = 'g-dot' + (i===0?' active':''); d.setAttribute('aria-label', 'Show photo ' + (i + 1));
       d.onclick = () => goTo(i);
       dotsEl.appendChild(d);
     });
@@ -1552,460 +1079,6 @@
     });
   })();
 </script>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials" style="padding:7rem 0;background:var(--cream);overflow:hidden;">
-  <div style="padding:0 6rem;">
-    <div class="section-eyebrow">What Clients Say</div>
-    <h2 class="section-title">Real Women, <em>Real Reviews</em></h2>
-    <div style="display:flex;align-items:center;gap:2rem;margin-top:0.8rem;margin-bottom:3rem;">
-      <div style="display:flex;gap:0.2rem;">
-        <span style="color:var(--gold);font-size:1.1rem;">★★★★★</span>
-      </div>
-      <a href="https://www.google.com/search?q=Sree+Subha+Sarees+Sugar+Land+TX+reviews" target="_blank" rel="noopener" style="font-size:0.8rem;color:var(--muted);letter-spacing:0.08em;">5.0 on Google · 32 Reviews</a>
-    </div>
-  </div>
-
-  <!-- Track wrapper -->
-  <div class="t-outer">
-    <div class="t-track" id="tTrack">
-
-      <!-- Newest Google reviews -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"I shared the style I wanted done and she was able to do it for me. Sari stayed in place and was comfortable. Arrived on time."</p>
-        <div class="t-author">
-          <div class="t-avatar">LH</div>
-          <div><div class="t-name">Little Hummingbird</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra was so professional and kind. She took her time to drape the saree perfectly. I felt at ease to dance late into the night in the saree. Will definitely use her again."</p>
-        <div class="t-author">
-          <div class="t-avatar">SR</div>
-          <div><div class="t-name">Sowmya Rao</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"I had a wonderful experience with the saree draping service! The saree was draped beautifully, the pleats were neat, and it stayed comfortable and secure throughout the event. She was professional, patient, and paid attention to every detail. Highly recommend!"</p>
-        <div class="t-author">
-          <div class="t-avatar">VF</div>
-          <div><div class="t-name">Vafa Favas</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra did a great job pre-pleating my saree for a wedding event. She also gave clear instructions on how to drape the pre-pleated saree and pack it in my suitcase. It definitely made my life so much easier."</p>
-        <div class="t-author">
-          <div class="t-avatar">SY</div>
-          <div><div class="t-name">Sudha Yalamanchili</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Absolutely loved the saree draping — so elegant, neat, and perfectly done! ❤️✨"</p>
-        <div class="t-author">
-          <div class="t-avatar">CM</div>
-          <div><div class="t-name">Chaithanya Ms</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"She did the saree pre-pleating for me, it was very perfect and wonderful. Definitely recommend her!"</p>
-        <div class="t-author">
-          <div class="t-avatar">SR</div>
-          <div><div class="t-name">Sujitha Ravichandran</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Saree pleating was done very well."</p>
-        <div class="t-author">
-          <div class="t-avatar">RS</div>
-          <div><div class="t-name">Rupal Shah</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Excellent service — highly recommend! Subhadra is very personable and professional. Pre-pleating and pressed saree was perfect and so easy to drape."</p>
-        <div class="t-author">
-          <div class="t-avatar">RM</div>
-          <div><div class="t-name">Rakhee Matlapudi</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"I needed my saree pleated for a very important occasion (Onam). I called a few places and no one had availability, but she was very timely and helpful. The saree was very easy to wear."</p>
-        <div class="t-author">
-          <div class="t-avatar">KN</div>
-          <div><div class="t-name">Keny Nair</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra did a fantastic job with saree pre-pleating and also draped the saree for me. It was perfectly pleated and draped and I received several compliments. I will be using these services regularly! Thank you so much 🙏"</p>
-        <div class="t-author">
-          <div class="t-avatar">SM</div>
-          <div><div class="t-name">Sunanda Muralee</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Saree pleating was very good. Saves time in draping. I tried it for the first time — friendly service. I got this service number through a friend."</p>
-        <div class="t-author">
-          <div class="t-avatar">SS</div>
-          <div><div class="t-name">Sundari Subramanian</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"The saree pleating is neat and good, and it makes it easy for me to drape the saree within 5 minutes."</p>
-        <div class="t-author">
-          <div class="t-avatar">AS</div>
-          <div><div class="t-name">Anusha Sama</div></div>
-        </div>
-      </div>
-
-      <!-- Card 1 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Very nice pleating, and very fast and easy communication!"</p>
-        <div class="t-author">
-          <div class="t-avatar">AG</div>
-          <div><div class="t-name">Ammu Gopan</div></div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"She is very patient and sari fitting and draping is very professional and good quality work. Highly recommend!"</p>
-        <div class="t-author">
-          <div class="t-avatar">SB</div>
-          <div><div class="t-name">Sindhu Baskaran</div></div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Accurate measurement. Excellent pleating. Will recommend."</p>
-        <div class="t-author">
-          <div class="t-avatar">RB</div>
-          <div><div class="t-name">Revathi Baskaran</div></div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Amazing service — came on time and her draping is flawless. My event was 8 hours and the draping stayed perfect. This was my first time wearing a saree!"</p>
-        <div class="t-author">
-          <div class="t-avatar">SH</div>
-          <div><div class="t-name">Saher Haider</div></div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="t-card t-card--featured">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra was very helpful and prompt. She draped for me, my younger daughter, and my sister visiting from Arizona. Many friends also got draped by her at my daughter's wedding. She was punctual and even did a Bengali style drape!"</p>
-        <div class="t-author">
-          <div class="t-avatar">MD</div>
-          <div><div class="t-name">Mou Das</div></div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subha was very professional. She arrived on time at my hotel and draped my saree to perfection. She pinned it so well that I didn't have to worry at all. Highly recommend!"</p>
-        <div class="t-author">
-          <div class="t-avatar">AH</div>
-          <div><div class="t-name">Alizeh Hussain</div></div>
-        </div>
-      </div>
-
-      <!-- Card 7 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra did a fantastic job of saree pre-pleating. It was super easy and effortless — took less than 5 mins to get the saree draped!"</p>
-        <div class="t-author">
-          <div class="t-avatar">SS</div>
-          <div><div class="t-name">Sreedhevi Sampath</div></div>
-        </div>
-      </div>
-
-      <!-- Card 8 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"She was great at putting together my saree just the way I wanted! It was perfectly pleated and folded without causing any issues. 10/10 would recommend."</p>
-        <div class="t-author">
-          <div class="t-avatar">NR</div>
-          <div><div class="t-name">Nikitha Reddy</div></div>
-        </div>
-      </div>
-
-      <!-- Card 9 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"I hired Subhadra for a wedding and she did a wonderful job for all sarees and was always on time. Would hire her again for any event in the Houston area."</p>
-        <div class="t-author">
-          <div class="t-avatar">AP</div>
-          <div><div class="t-name">Anu Peter</div></div>
-        </div>
-      </div>
-
-      <!-- Card 10 -->
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subha did a great job pre-pleating a saree. I was able to drape it in 5 minutes!"</p>
-        <div class="t-author">
-          <div class="t-avatar">AV</div>
-          <div><div class="t-name">Anusha Velagapudi</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Saree draping was comfortable and efficient. Very easy and fast communication."</p>
-        <div class="t-author">
-          <div class="t-avatar">BD</div>
-          <div><div class="t-name">Bhagyashri Deshmukh</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra, thank you for pre-pleating the sarees. It was very well done and so easy to wear."</p>
-        <div class="t-author">
-          <div class="t-avatar">JK</div>
-          <div><div class="t-name">Josna Kotturappa</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Very nice pleating and quick. I would recommend this. Good luck!"</p>
-        <div class="t-author">
-          <div class="t-avatar">HL</div>
-          <div><div class="t-name">Harini Lokam</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Saree was draped and so easy to wear."</p>
-        <div class="t-author">
-          <div class="t-avatar">AA</div>
-          <div><div class="t-name">Angela A</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra has done an excellent job for me. Saree was perfect. I really appreciate her for her good job."</p>
-        <div class="t-author">
-          <div class="t-avatar">NT</div>
-          <div><div class="t-name">Nina Thomas</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Subhadra did a very good job on draping my saree. She is very dependable and has great communication."</p>
-        <div class="t-author">
-          <div class="t-avatar">GJ</div>
-          <div><div class="t-name">George Joseph</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Loved the saree draping — it was neat, beautiful, and stayed in place all day. Highly recommend!"</p>
-        <div class="t-author">
-          <div class="t-avatar">JS</div>
-          <div><div class="t-name">Jeladhara S</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"Recently Subha did a great job pre-pleating my saree. I was able to drape it in 5 mins, highly recommend Subha for saree pre-pleating."</p>
-        <div class="t-author">
-          <div class="t-avatar">MA</div>
-          <div><div class="t-name">Mercy Abraham</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"All my sarees were pressed and pleated perfectly. I highly recommend Subhadra. Thank you for completing everything on time."</p>
-        <div class="t-author">
-          <div class="t-avatar">GR</div>
-          <div><div class="t-name">Geetha Ravula</div></div>
-        </div>
-      </div>
-
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <div class="t-author">
-          <div class="t-avatar">PA</div>
-          <div><div class="t-name">Pranathi Ari</div></div>
-        </div>
-      </div>
-
-    </div><!-- end t-track -->
-  </div><!-- end t-outer -->
-
-  <!-- Dot nav -->
-  <div class="t-dots" id="tDots"></div>
-
-  <!-- Arrow controls -->
-  <div style="display:flex;justify-content:center;gap:1rem;margin-top:2rem;padding:0 6rem;">
-    <button class="t-arrow" id="tPrev" onclick="moveCarousel(-1)">←</button>
-    <button class="t-arrow" id="tNext" onclick="moveCarousel(1)">→</button>
-  </div>
-
-  <!-- Review call-to-action -->
-  <div class="review-cta">
-    <p class="review-cta-text">Had your saree draped or pleated with us? We'd love to hear about it.</p>
-    <div class="review-cta-actions">
-      <a href="https://g.page/r/CU7vVYFiqTotEAE/review" target="_blank" rel="noopener" class="btn-primary review-btn">★ Leave Us a Review</a>
-      <a href="https://www.google.com/search?q=Sree+Subha+Sarees+Sugar+Land+TX+reviews" target="_blank" rel="noopener" class="review-link">See all reviews on Google →</a>
-    </div>
-  </div>
-</section>
-
-<style>
-  .t-outer {
-    overflow: hidden;
-    cursor: grab;
-    user-select: none;
-    padding: 0.5rem 0 2rem;
-  }
-  .t-outer.dragging { cursor: grabbing; }
-
-  .t-track {
-    display: flex;
-    gap: 1.5rem;
-    padding: 0 6rem;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
-  }
-
-  .t-card {
-    flex: 0 0 340px;
-    background: white;
-    border: 1px solid rgba(201,168,76,0.15);
-    padding: 2.2rem;
-    position: relative;
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  .t-card:hover {
-    box-shadow: 0 16px 50px rgba(74,21,40,0.1);
-    transform: translateY(-4px);
-  }
-  .t-card--featured {
-    border-color: rgba(201,168,76,0.5);
-    background: linear-gradient(160deg, #fff 80%, rgba(201,168,76,0.05) 100%);
-  }
-  .t-card--featured::before {
-    content: '✦ Top Review';
-    position: absolute; top: -1px; right: 1.5rem;
-    background: var(--gold);
-    color: var(--deep);
-    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 0.25rem 0.7rem; font-family: 'Jost', sans-serif; font-weight: 500;
-  }
-
-  .t-stars {
-    color: var(--gold);
-    font-size: 0.95rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
-  .t-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem; font-style: italic;
-    line-height: 1.7; color: var(--text);
-    margin-bottom: 1.5rem;
-  }
-  .t-quote::before { content: '\201C'; color: var(--gold); font-size: 1.4rem; line-height: 0; vertical-align: -0.3em; margin-right: 0.1rem; }
-  .t-author {
-    display: flex; align-items: center; gap: 0.85rem;
-    border-top: 1px solid rgba(201,168,76,0.12);
-    padding-top: 1.2rem;
-  }
-  .t-avatar {
-    width: 2.4rem; height: 2.4rem;
-    background: linear-gradient(135deg, #4a1528, #3a0d1e);
-    color: var(--gold-pale);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.05em;
-    flex-shrink: 0;
-  }
-  .t-name {
-    font-size: 0.85rem; font-weight: 500; color: var(--text);
-  }
-  .t-date {
-    font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem;
-    letter-spacing: 0.05em;
-  }
-
-  .review-cta { text-align: center; margin-top: 3rem; padding: 0 1.5rem; }
-  .review-cta-text { font-size: 0.95rem; color: var(--muted); margin-bottom: 1.2rem; }
-  .review-cta-actions { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
-  .review-link { color: var(--wine); font-size: 0.85rem; letter-spacing: 0.05em; text-decoration: none; border-bottom: 1px solid var(--gold); }
-  .t-dots {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
-    margin-top: 2rem; padding: 0 6rem;
-  }
-  .t-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(201,168,76,0.25);
-    border: none; cursor: pointer; padding: 0;
-    transition: all 0.3s;
-  }
-  .t-dot.active {
-    background: var(--gold); width: 20px; border-radius: 3px;
-  }
-
-  .t-arrow {
-    width: 2.8rem; height: 2.8rem;
-    border: 1px solid rgba(201,168,76,0.3);
-    background: transparent;
-    color: var(--gold); font-size: 1.1rem;
-    cursor: pointer; transition: all 0.3s;
-    font-family: 'Jost', sans-serif;
-  }
-  .t-arrow:hover {
-    background: var(--gold); color: var(--deep);
-  }
-  .t-arrow:disabled { opacity: 0.25; cursor: default; }
-
-  @media (max-width: 900px) {
-    .t-track { padding: 0 1.5rem; }
-    .t-card { flex: 0 0 calc(100vw - 3rem); }
-    #testimonials > div:first-child { padding: 0 1.5rem; }
-    .t-dots, .t-dots + div { padding: 0 1.5rem; }
-  }
-</style>
-
 <script>
   (function() {
     const track = document.getElementById('tTrack');
@@ -2027,6 +1100,7 @@
       for (let i = 0; i <= maxIdx; i++) {
         const dot = document.createElement('button');
         dot.className = 't-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Show review ' + (i + 1));
         dot.onclick = () => goTo(i);
         dotsContainer.appendChild(dot);
       }
@@ -2076,114 +1150,53 @@
     goTo(0);
   })();
 </script>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-eyebrow">Get in Touch</div>
-  <h2 class="section-title">Ready to Look <em>Stunning?</em></h2>
-  <div class="contact-grid">
-    <div class="contact-info">
-      <div class="contact-item">
-        <div class="contact-icon">📍</div>
-        <div>
-          <div class="contact-label">Location</div>
-          <div class="contact-value">225 Fluor Daniel Dr,<br>Sugar Land, TX<br><span style="font-size:0.8rem;color:var(--muted);font-family:'Jost',sans-serif;">Serving Sugar Land, Stafford, Missouri City, Pearland, Houston, Katy, Cypress &amp; Fulshear</span></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div>
-          <div class="contact-label">Phone</div>
-          <div class="contact-value"><a href="tel:13468296459">346-829-6459</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">✉</div>
-        <div>
-          <div class="contact-label">Email</div>
-          <div class="contact-value"><a href="mailto:subhadra.jayaharan@gmail.com">subhadra.jayaharan@gmail.com</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:1.1rem;height:1.1rem;color:var(--gold);"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-        <div>
-          <div class="contact-label">Instagram</div>
-          <div class="contact-value"><a href="https://instagram.com/sreesubhasarees" target="_blank">@sreesubhasarees</a></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="contact-form-area">
-      <h3 class="form-title">Send a Message</h3>
-      <p class="form-sub">Have questions about draping styles, pricing, or availability? We'd love to hear from you.</p>
-      <div class="form-row">
-        <label>Your Name</label>
-        <input type="text" id="f-name" placeholder="Full name" />
-      </div>
-      <div class="form-row">
-        <label>Phone Number</label>
-        <input type="tel" id="f-phone" placeholder="Your contact number" />
-      </div>
-      <div class="form-row">
-        <label>Interested In</label>
-        <select id="f-service">
-          <option value="" disabled selected>Select a service</option>
-          <option>Saree Draping</option>
-          <option>Saree Pre-Pleating</option>
-          <option>Saree Pico</option>
-          <option>Saree Falls</option>
-          <option>Lightweight Designer Sarees</option>
-          <option>Fancy Sarees</option>
-          <option>Budget Sarees</option>
-          <option>Pure Cotton Sarees</option>
-          <option>Silk-Cotton Sarees</option>
-          <option>Art Silk Sarees</option>
-          <option>9 Yard Cotton Sarees</option>
-          <option>Kurtis</option>
-          <option>Readymade Blouses</option>
-          <option>100% Cotton T-Shirts</option>
-          <option>Dhotis</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Event / Occasion</label>
-        <input type="text" id="f-occasion" placeholder="e.g. Wedding, Pooja, Festival..." />
-      </div>
-      <div class="form-row">
-        <label>Message</label>
-        <textarea id="f-message" placeholder="Tell us more about your event date, style preferences, or any questions..."></textarea>
-      </div>
-      <button class="btn-submit" onclick="sendWhatsApp()">💬 Send via WhatsApp</button>
-    </div>
-  </div>
-
-  <!-- Google Maps -->
-  <div style="margin-top:3rem; border-radius:0; overflow:hidden; border:1px solid rgba(201,168,76,0.15);">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55839.37961153236!2d-95.670551!3d29.593015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640e66f886ffb4b%3A0x9bd9e2c22de0f841!2sSugar%20Land%2C%20TX!5e0!3m2!1sen!2sus!4v1703960000000"
-      width="100%" height="300" style="border:0;display:block;"
-      allowfullscreen="" loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Sree Subha Sarees</div>
-  <div class="footer-links">
-    <a href="#sales">Collection</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div class="footer-copy">© 2026 Sree Subha Sarees. All rights reserved.</div>
-</footer>
-
-<!-- FLOATING CALL BUTTON -->
-<a href="tel:13468296459" class="float-call" title="Call to Book" style="bottom:5rem;">📞</a>
-<a href="https://wa.me/13468296459" target="_blank" class="float-call" title="WhatsApp us" style="background:#25d366;box-shadow:0 4px 20px rgba(37,211,102,0.4);font-size:1.4rem;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:1.4rem;height:1.4rem;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-
+<script>
+  // Plan your booking: tick services, set the number of sarees, send the plan on WhatsApp
+  (function () {
+    var form = document.getElementById('planner');
+    var boxes = form.querySelectorAll('input[name="svc"]');
+    var n = 1, out = document.getElementById('cOut'), total = document.getElementById('pTotal'), s = document.getElementById('cS');
+    function sum() {
+      var t = 0;
+      boxes.forEach(function (b) { if (b.checked) t += +b.dataset.price; });
+      out.textContent = n; s.hidden = n === 1;
+      total.textContent = t ? 'from $' + (t * n) : 'pick a service';
+      return t * n;
+    }
+    boxes.forEach(function (b) { b.addEventListener('change', sum); });
+    document.getElementById('cMinus').onclick = function () { n = Math.max(1, n - 1); sum(); };
+    document.getElementById('cPlus').onclick = function () { n = Math.min(20, n + 1); sum(); };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var picked = [].filter.call(boxes, function (b) { return b.checked; }).map(function (b) { return b.value; });
+      var msg = 'Hi Subhadra! I found you on your website and would like to book.\n' +
+        (picked.length ? 'Services: ' + picked.join(', ') + '\n' : '') +
+        'Number of sarees: ' + n + '\n' + (picked.length ? 'Starting price shown: $' + sum() : '');
+      if (window.gtag) gtag('event', 'booking_planner_whatsapp');
+      window.open('https://wa.me/13468296459?text=' + encodeURIComponent(msg), '_blank');
+    });
+    sum();
+  })();
+  // Smooth scrolling for in-page links
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href').length < 2) return;
+    var t = document.querySelector(a.getAttribute('href'));
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    history.replaceState(null, '', a.getAttribute('href'));
+  });
+  // Hero: the pleats tile slowly crossfades between three sarees
+  (function () {
+    var imgs = document.querySelectorAll('#heroStack img'), i = 0;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || imgs.length < 2) return;
+    setInterval(function () {
+      if (document.hidden) return;
+      imgs[i].classList.remove('on'); i = (i + 1) % imgs.length; imgs[i].classList.add('on');
+    }, 5500);
+  })();
+</script>
 <script>
   // Hamburger menu
   const hamburger = document.getElementById('hamburger');
@@ -2211,52 +1224,6 @@
     link.addEventListener('click', closeMenu);
   });
 </script>
-
-<script>
-  // WhatsApp contact form
-  function sendToWhatsApp() {
-    var name     = document.getElementById('f-name').value.trim();
-    var phone    = document.getElementById('f-phone').value.trim();
-    var service  = document.getElementById('f-service').value;
-    var occasion = document.getElementById('f-occasion').value.trim();
-    var message  = document.getElementById('f-message').value.trim();
-
-    if (!name)  { alert('Please enter your name.'); return; }
-    if (!phone) { alert('Please enter your phone number.'); return; }
-
-    var text = 'Hi Subhadra! I found you on your website.' +
-      '%0AName: ' + encodeURIComponent(name) +
-      '%0AMy Phone: ' + encodeURIComponent(phone) +
-      '%0AService: ' + encodeURIComponent(service || 'Not specified') +
-      '%0AOccasion: ' + encodeURIComponent(occasion || 'Not specified') +
-      '%0AMessage: ' + encodeURIComponent(message || 'I would like to enquire about your services.');
-
-    var btn = document.getElementById('contactSubmit');
-    btn.innerHTML = '&#10003; Opening WhatsApp...';
-    btn.style.background = 'linear-gradient(135deg,#25d366,#128c7e)';
-    gtag('event', 'contact_form_whatsapp');
-    window.open('https://wa.me/13468296459?text=' + text, '_blank');
-    setTimeout(function() {
-      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:1.4rem;height:1.4rem;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Send via WhatsApp';
-      btn.style.background = '';
-    }, 3000);
-  }
-
-  // Smooth nav highlighting
-  var sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', function() {
-    var scrollY = window.scrollY;
-    sections.forEach(function(sec) {
-      var top = sec.offsetTop - 100;
-      var bottom = top + sec.offsetHeight;
-      var link = document.querySelector('nav a[href="#' + sec.id + '"]');
-      if (link) {
-        link.style.color = (scrollY >= top && scrollY < bottom) ? 'var(--gold-light)' : '';
-      }
-    });
-  });
-</script>
-
 <script>
   // ── CONTACT FORM → WHATSAPP ──
   function sendWhatsApp() {
@@ -2289,7 +1256,7 @@
       var bottom = top + sec.offsetHeight;
       var link = document.querySelector('nav a[href="#' + sec.id + '"]');
       if (link) {
-        link.style.color = (scrollY >= top && scrollY < bottom) ? 'var(--gold-light)' : '';
+        link.style.color = (scrollY >= top && scrollY < bottom) ? 'var(--gold)' : '';
       }
     });
   });
